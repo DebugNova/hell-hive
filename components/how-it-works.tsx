@@ -49,8 +49,15 @@ const itemVariants = {
 export function HowItWorks() {
   return (
     <section id="about" className="py-16 sm:py-24 relative overflow-hidden">
+      {/* Honeycomb pattern background */}
+      <div className="absolute inset-0 honeycomb-bg opacity-15" />
+      
       {/* Background accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-accent/5 rounded-full blur-[128px]" />
+      
+      {/* Flame accents on both sides */}
+      <div className="absolute top-1/3 left-4 w-3 h-6 gradient-flame rounded-full blur-sm opacity-25 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+      <div className="absolute top-1/2 right-6 w-4 h-8 gradient-flame rounded-full blur-sm opacity-30 animate-pulse" style={{ animationDelay: "0.7s", borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

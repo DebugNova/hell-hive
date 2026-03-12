@@ -40,8 +40,14 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="relative pt-16 sm:pt-24 pb-8 sm:pb-12 border-t border-border">
+      {/* Honeycomb pattern */}
+      <div className="absolute inset-0 honeycomb-bg opacity-10" />
+      
       {/* Background gradient */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] sm:w-[800px] h-[200px] sm:h-[400px] bg-primary/5 rounded-full blur-[128px]" />
+      
+      {/* Flame accents */}
+      <div className="absolute top-20 right-10 w-3 h-6 gradient-flame rounded-full blur-sm opacity-20 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Newsletter - Mobile first placement */}
@@ -93,8 +99,9 @@ export function Footer() {
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
-              <span className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:text-glow transition-all">
-                HellHive
+              <span className="text-xl sm:text-2xl font-script tracking-wide group-hover:text-glow transition-all">
+                <span className="text-foreground">Hell</span>
+                <span className="text-flame">Hive</span>
               </span>
             </Link>
             <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-xs">

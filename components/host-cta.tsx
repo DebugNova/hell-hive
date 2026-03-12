@@ -37,6 +37,9 @@ const itemVariants = {
 export function HostCTA() {
   return (
     <section id="host" className="py-16 sm:py-24 relative overflow-hidden">
+      {/* Honeycomb pattern */}
+      <div className="absolute inset-0 honeycomb-bg opacity-15" />
+      
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
@@ -65,6 +68,10 @@ export function HostCTA() {
           className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] rounded-full bg-accent/10 blur-[100px]"
         />
       </div>
+      
+      {/* Flame accents */}
+      <div className="absolute bottom-20 left-8 w-5 h-10 gradient-flame rounded-full blur-sm opacity-40 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+      <div className="absolute top-20 right-10 w-4 h-8 gradient-flame rounded-full blur-sm opacity-30 animate-pulse" style={{ animationDelay: "0.8s", borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden">

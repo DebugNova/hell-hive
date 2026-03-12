@@ -129,8 +129,15 @@ export function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="py-16 sm:py-24 relative overflow-hidden">
+      {/* Honeycomb pattern */}
+      <div className="absolute inset-0 honeycomb-bg opacity-10" />
+      
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
+      
+      {/* Flame accents */}
+      <div className="absolute top-1/4 left-6 w-3 h-6 gradient-flame rounded-full blur-sm opacity-25 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+      <div className="absolute bottom-1/3 right-8 w-4 h-8 gradient-flame rounded-full blur-sm opacity-30 animate-pulse" style={{ animationDelay: "0.6s", borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
       
       <div className="relative z-10">
         {/* Section Header */}

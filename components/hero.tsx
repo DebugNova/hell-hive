@@ -6,6 +6,7 @@ import { ArrowRight, MapPin, Calendar, Search, Sparkles, Users, Star, TrendingUp
 import Link from "next/link"
 import { useRef, useState } from "react"
 import Image from "next/image"
+import { Embers } from "./flame-effect"
 
 const stats = [
   { value: "50K+", label: "Active Users", icon: Users },
@@ -45,6 +46,24 @@ const itemVariants = {
   },
 }
 
+// Honeycomb SVG path for clipping
+function HoneycombMask() {
+  return (
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <clipPath id="honeycombClip" clipPathUnits="objectBoundingBox">
+          <path d="M0.5,0.05 L0.85,0.2 L0.85,0.55 L0.5,0.7 L0.15,0.55 L0.15,0.2 Z" />
+        </clipPath>
+        <linearGradient id="honeycombGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ff3366" stopOpacity="0.3" />
+          <stop offset="50%" stopColor="#ff6633" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#ffcc33" stopOpacity="0.1" />
+        </linearGradient>
+      </defs>
+    </svg>
+  )
+}
+
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeCategory, setActiveCategory] = useState("All Events")
@@ -62,30 +81,108 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Background Image with Parallax */}
+      {/* Dark background base */}
+      <div className="absolute inset-0 bg-background z-0" />
+      
+      {/* Honeycomb pattern overlay */}
+      <div className="absolute inset-0 honeycomb-bg opacity-30 z-[1]" />
+      
+      {/* Central Honeycomb with image */}
       <motion.div 
-        style={{ scale, y: backgroundY }}
-        className="absolute inset-0 z-0"
+        style={{ scale }}
+        className="absolute inset-0 flex items-center justify-center z-[2]"
       >
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Event atmosphere"
-          fill
-          className="object-cover object-center"
-          priority
-          quality={75}
-        />
-        {/* Multi-layer Gradient Overlays for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_var(--background)_100%)] opacity-60" />
+        {/* Large honeycomb shape with image inside */}
+        <div className="relative w-[80vw] h-[80vh] max-w-[900px] max-h-[700px]">
+          {/* Honeycomb border glow */}
+          <svg 
+            className="absolute inset-0 w-full h-full" 
+            viewBox="0 0 100 100" 
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <defs>
+              <linearGradient id="borderGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#ff3366" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#ff6633" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#ffcc33" stopOpacity="0.4" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            {/* Honeycomb outline */}
+            <polygon 
+              points="50,5 90,25 90,75 50,95 10,75 10,25" 
+              fill="none" 
+              stroke="url(#borderGradient)" 
+              strokeWidth="0.5"
+              filter="url(#glow)"
+            />
+          </svg>
+          
+          {/* Image clipped to honeycomb */}
+          <div 
+            className="absolute inset-0 overflow-hidden"
+            style={{
+              clipPath: "polygon(50% 5%, 90% 25%, 90% 75%, 50% 95%, 10% 75%, 10% 25%)",
+            }}
+          >
+            <motion.div style={{ y: backgroundY }} className="w-full h-full">
+              <Image
+                src="/images/hero-bg.jpg"
+                alt="Event atmosphere"
+                fill
+                className="object-cover object-center"
+                priority
+                quality={75}
+              />
+              {/* Inner gradient overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/80" />
+            </motion.div>
+          </div>
+          
+          {/* Flame embers rising from bottom of honeycomb */}
+          <Embers count={8} className="z-10" />
+        </div>
       </motion.div>
-
-      {/* Ambient glow effects */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/15 rounded-full blur-[128px] animate-pulse" style={{ animationDelay: "1s" }} />
+      
+      {/* Radial dark vignette from edges */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_var(--background)_70%)] z-[3]" />
+      
+      {/* Additional corner darkening */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-[3]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background z-[3]" />
+      
+      {/* Decorative flame accents on sides */}
+      <div className="absolute left-4 sm:left-8 top-1/3 z-[4]">
+        <motion.div
+          animate={{ 
+            scale: [1, 1.1, 0.95, 1.05, 1],
+            opacity: [0.3, 0.5, 0.3, 0.4, 0.3]
+          }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-6 h-10 sm:w-8 sm:h-14 gradient-flame rounded-full blur-sm"
+          style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}
+        />
+      </div>
+      <div className="absolute right-4 sm:right-8 top-1/2 z-[4]">
+        <motion.div
+          animate={{ 
+            scale: [1, 0.95, 1.1, 1, 0.98],
+            opacity: [0.25, 0.4, 0.3, 0.45, 0.25]
+          }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          className="w-5 h-8 sm:w-6 sm:h-12 gradient-flame rounded-full blur-sm"
+          style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}
+        />
+      </div>
 
       {/* Content */}
       <motion.div 
@@ -110,31 +207,31 @@ export function Hero() {
             </motion.span>
           </motion.div>
 
-          {/* Brand Name */}
+          {/* Brand Name - Script Font */}
           <motion.div
             variants={itemVariants}
             className="mb-4 sm:mb-6"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight">
-              <span className="text-foreground">Hell</span>
-              <span className="text-primary text-glow">Hive</span>
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-script tracking-wide">
+              <span className="text-foreground drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">Hell</span>
+              <span className="text-flame drop-shadow-[0_0_40px_rgba(255,51,102,0.5)]">Hive</span>
             </h1>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h2
             variants={itemVariants}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.2] mb-6 sm:mb-8"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-[1.2] mb-6 sm:mb-8"
           >
             <span className="text-foreground/90">Find Your Next </span>
-            <span className="text-primary">Unforgettable</span>
+            <span className="text-primary text-glow">Unforgettable</span>
             <span className="text-foreground/90"> Experience</span>
           </motion.h2>
 
           {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
+            className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
           >
             Discover exclusive events, connect with like-minded people, and create memories that last a lifetime.
           </motion.p>
@@ -142,7 +239,7 @@ export function Hero() {
           {/* Search Bar - Desktop */}
           <motion.div
             variants={itemVariants}
-            className="hidden sm:block glass-strong rounded-2xl p-2 mb-8 max-w-3xl mx-auto"
+            className="hidden sm:block glass-strong rounded-2xl p-2 mb-8 max-w-3xl mx-auto border border-primary/10"
           >
             <div className="flex items-center gap-2">
               <div className="flex-1 flex items-center gap-3 px-4 py-3.5 rounded-xl bg-secondary/50 group focus-within:bg-secondary/80 focus-within:ring-2 focus-within:ring-primary/30 transition-all">
@@ -173,7 +270,7 @@ export function Hero() {
           {/* Search Bar - Mobile */}
           <motion.div
             variants={itemVariants}
-            className="sm:hidden glass-strong rounded-2xl p-3 mb-6 mx-2"
+            className="sm:hidden glass-strong rounded-2xl p-3 mb-6 mx-2 border border-primary/10"
           >
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary/50">
@@ -244,7 +341,7 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="w-full sm:w-auto text-base px-8 py-6 border-border/50 bg-background/20 backdrop-blur-sm hover:bg-secondary/50 hover:border-primary/30 transition-all hover:scale-[1.02]"
+              className="w-full sm:w-auto text-base px-8 py-6 border-primary/30 bg-background/20 backdrop-blur-sm hover:bg-primary/10 hover:border-primary/50 transition-all hover:scale-[1.02]"
               asChild
             >
               <Link href="#host">Host Your Event</Link>
@@ -256,7 +353,7 @@ export function Hero() {
             variants={itemVariants}
             className="grid grid-cols-3 gap-4 sm:gap-8 max-w-xl mx-auto"
           >
-            {stats.map((stat, index) => (
+            {stats.map((stat) => (
               <motion.div
                 key={stat.label}
                 whileHover={{ y: -5, scale: 1.05 }}
@@ -284,15 +381,17 @@ export function Hero() {
           className="flex flex-col items-center gap-2"
         >
           <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-widest">Scroll to explore</span>
-          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2">
+          <div className="w-6 h-10 rounded-full border-2 border-primary/30 flex items-start justify-center p-2">
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-2 rounded-full bg-primary"
+              className="w-1 h-2 rounded-full gradient-flame"
             />
           </div>
         </motion.div>
       </motion.div>
+      
+      <HoneycombMask />
     </section>
   )
 }

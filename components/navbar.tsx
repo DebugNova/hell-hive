@@ -66,8 +66,9 @@ export function Navbar() {
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
-              <span className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:text-glow transition-all duration-300">
-                HellHive
+              <span className="text-xl sm:text-2xl font-script tracking-wide group-hover:text-glow transition-all duration-300">
+                <span className="text-foreground">Hell</span>
+                <span className="text-flame">Hive</span>
               </span>
             </Link>
 
@@ -173,7 +174,10 @@ export function Navbar() {
                 <div className="flex items-center justify-between p-4 border-b border-border/50">
                   <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                     <Flame className="h-7 w-7 text-primary" />
-                    <span className="text-lg font-bold text-foreground">HellHive</span>
+                    <span className="text-xl font-script">
+                      <span className="text-foreground">Hell</span>
+                      <span className="text-flame">Hive</span>
+                    </span>
                   </Link>
                   <motion.button
                     whileTap={{ scale: 0.9 }}

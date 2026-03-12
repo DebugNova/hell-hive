@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Flame, ChevronRight } from "lucide-react"
+import { Menu, X, Flame, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -199,7 +199,7 @@ export function Navbar() {
                         className="flex items-center justify-between text-lg text-foreground/80 hover:text-foreground transition-colors py-4 px-4 rounded-xl hover:bg-secondary/50 group"
                       >
                         {link.label}
-                        <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                        <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                       </Link>
                     </motion.div>
                   ))}

@@ -75,7 +75,7 @@ export function Hero() {
           fill
           className="object-cover object-center"
           priority
-          quality={90}
+          quality={75}
         />
         {/* Multi-layer Gradient Overlays for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/40 to-background" />

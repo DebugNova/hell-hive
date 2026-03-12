@@ -401,149 +401,6 @@ function GlassButton({
 export default function HellHiveHero() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-[var(--hive-midnight)] flex items-center justify-center">
-      
-      {/* ========================================================== */}
-      {/* SVG FILTER DEFINITIONS FOR FIRE & DRIPPING EFFECTS          */}
-      {/* ========================================================== */}
-      <svg className="hidden">
-        <defs>
-          {/* Main Fire Displacement Filter */}
-          <filter id="fire-drip" x="-20%" y="-20%" width="140%" height="180%">
-            {/* Generate turbulent noise for realistic flame shapes */}
-            <feTurbulence 
-              type="fractalNoise" 
-              baseFrequency="0.015 0.035" 
-              numOctaves="3" 
-              seed="2" 
-              result="noise"
-            >
-              <animate 
-                attributeName="baseFrequency" 
-                values="0.015 0.035; 0.015 0.055; 0.015 0.035" 
-                dur="3s" 
-                repeatCount="indefinite" 
-              />
-            </feTurbulence>
-            
-            {/* Scroll the noise upwards to simulate rising fire/dripping */}
-            <feOffset dx="0" dy="-10" result="scrolledNoise">
-               <animate 
-                 attributeName="dy" 
-                 values="0; -60" 
-                 dur="1.5s" 
-                 repeatCount="indefinite" 
-               />
-            </feOffset>
-
-            {/* Displace the source text using the scrolled noise */}
-            <feDisplacementMap 
-              in="SourceGraphic" 
-              in2="scrolledNoise" 
-              scale="20" 
-              xChannelSelector="R" 
-              yChannelSelector="G" 
-              result="displacedText"
-            >
-               <animate 
-                 attributeName="scale" 
-                 values="15; 25; 15" 
-                 dur="2s" 
-                 repeatCount="indefinite" 
-               />
-            </feDisplacementMap>
-
-            {/* Create intense fire colors by manipulating alpha and blending */}
-            <feColorMatrix 
-              type="matrix" 
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      0 0 0 1 0" 
-              in="displacedText" 
-              result="coloredDisplacement"
-            />
-            
-            {/* Merge the displaced turbulent text with the original sharp text */}
-            <feMerge>
-              <feMergeNode in="coloredDisplacement" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-      </svg>
-
-      {/* ========================================================== */}
-      {/* INJECTED CSS STYLES FOR FIRE ANIMATIONS                     */}
-      {/* ========================================================== */}
-      <style>{`
-        /* Animate the background image of the text upwards */
-        @keyframes burn-bg {
-          0% { background-position: 0% 100%; }
-          100% { background-position: 0% -100%; }
-        }
-
-        /* Pulsing, flickering intense glow */
-        @keyframes fire-glow {
-          0%, 100% {
-            text-shadow: 
-              0 -2px 4px #D4A017,
-              0 -10px 20px #FF4500,
-              0 -20px 40px #FF0000;
-          }
-          50% {
-            text-shadow: 
-              0 -4px 8px #FFD700,
-              0 -15px 30px #FF6A00,
-              0 -30px 60px #8B0000;
-          }
-          25%, 75% {
-            text-shadow: 
-              0 -3px 6px #FFA500,
-              0 -12px 25px #DC143C,
-              0 -25px 50px #800000;
-          }
-        }
-
-        /* Dripping flames container */
-        .text-fire-wrapper {
-          position: relative;
-          display: inline-block;
-        }
-
-        /* The actual fire text */
-        .text-fire {
-          /* Clip a fiery gradient to the text shape */
-          background-image: linear-gradient(0deg, #FF0000 0%, #FF8C00 30%, #FFD700 60%, rgba(255,255,255,0.9) 100%);
-          background-size: 100% 200%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          
-          /* Apply SVG turbulence filter */
-          filter: url(#fire-drip);
-          
-          /* Combine animations */
-          animation: 
-            burn-bg 1.5s linear infinite,
-            fire-glow 0.8s ease-in-out infinite alternate;
-        }
-        
-        /* Inner intense white-hot core */
-        .text-fire::after {
-           content: attr(data-text);
-           position: absolute;
-           left: 0;
-           top: 0;
-           color: rgba(255,255,255,0.8);
-           -webkit-background-clip: text;
-           filter: blur(2px);
-           z-index: 2;
-           mix-blend-mode: overlay;
-           pointer-events: none;
-        }
-      `}</style>
-
-
       {/* LAYER 1: Base dark background */}
       <div className="absolute inset-0 bg-black" />
 
@@ -557,18 +414,18 @@ export default function HellHiveHero() {
       <EmberParticles />
 
       {/* LAYER 5: Content (highest z-index) */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center mt-[-10vh]">
-        
-        {/* Main title - REAL FIRE EFFECT */}
-        <div className="text-fire-wrapper mb-8">
-          <h1
-            className="text-fire text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-black tracking-[0.1em]"
-            style={{ fontFamily: "'Cinzel', serif" }} /* Using a cinematic, slightly sharp font if available, or fallback */
-            data-text="HELLHIVE"
-          >
-            HELLHIVE
-          </h1>
-        </div>
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center">
+        {/* Main title */}
+        <h1
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-[0.2em] text-white mb-6"
+          style={{
+            textShadow: "0 0 30px rgba(255, 255, 255, 0.1)",
+            fontFamily: "system-ui, sans-serif",
+            letterSpacing: "0.15em",
+          }}
+        >
+          HELLHIVE
+        </h1>
 
         {/* Tagline */}
         <p

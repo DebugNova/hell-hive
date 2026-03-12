@@ -110,17 +110,26 @@ export function Hero() {
             </motion.span>
           </motion.div>
 
-          {/* Main Headline */}
-          <motion.h1
+          {/* Brand Name */}
+          <motion.div
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 sm:mb-8"
+            className="mb-4 sm:mb-6"
           >
-            <span className="block text-foreground">Find Your Next</span>
-            <span className="block mt-2">
-              <span className="text-primary text-glow">Unforgettable</span>
-            </span>
-            <span className="block text-foreground mt-2">Experience</span>
-          </motion.h1>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight">
+              <span className="text-foreground">Hell</span>
+              <span className="text-primary text-glow">Hive</span>
+            </h1>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h2
+            variants={itemVariants}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.2] mb-6 sm:mb-8"
+          >
+            <span className="text-foreground/90">Find Your Next </span>
+            <span className="text-primary">Unforgettable</span>
+            <span className="text-foreground/90"> Experience</span>
+          </motion.h2>
 
           {/* Subheadline */}
           <motion.p

@@ -70,7 +70,8 @@ export function Hero() {
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
+    layoutEffect: false
   })
   
   const y = useTransform(scrollYProgress, [0, 1], [0, 100])
@@ -81,6 +82,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
+      style={{ position: 'relative' }}
       className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-background"
     >
       {/* Dark background base */}
@@ -95,7 +97,7 @@ export function Hero() {
         className="absolute inset-0 flex items-center justify-center z-[2]"
       >
         {/* Large honeycomb shape with image inside */}
-        <div className="relative w-[80vw] h-[80vh] max-w-[900px] max-h-[700px]">
+        <div className="relative w-[80vw] h-[80vh] max-w-[900px] max-h-[700px]" style={{ position: 'relative' }}>
           {/* Honeycomb border glow */}
           <svg 
             className="absolute inset-0 w-full h-full" 

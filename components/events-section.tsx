@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import { EventCard } from "./event-card"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Filter } from "lucide-react"
+import { ArrowRight, Filter, SlidersHorizontal } from "lucide-react"
+import { useState } from "react"
 
 const events = [
   {
@@ -64,11 +65,23 @@ const events = [
 
 const categories = ["All", "Music", "Nightlife", "Social", "Gaming", "Art", "Networking"]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
 export function EventsSection() {
+  const [activeCategory, setActiveCategory] = useState("All")
+
   return (
-    <section id="discover" className="py-24 relative">
+    <section id="discover" className="py-16 sm:py-24 relative">
       {/* Background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[128px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-primary/5 rounded-full blur-[128px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -76,14 +89,21 @@ export function EventsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+          className="text-center mb-10 sm:mb-16"
         >
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">Discover</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-3 mb-4">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-block text-primary text-xs sm:text-sm font-semibold uppercase tracking-widest mb-3"
+          >
+            Discover
+          </motion.span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
             Trending Events
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto text-pretty px-4">
             From underground raves to rooftop socials, find the perfect event that matches your vibe.
           </p>
         </motion.div>
@@ -94,7 +114,7 @@ export function EventsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-12"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
         >
           {categories.map((category, index) => (
             <motion.button
@@ -103,11 +123,12 @@ export function EventsSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 + index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                category === "All"
-                  ? "gradient-primary text-primary-foreground"
+              onClick={() => setActiveCategory(category)}
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                category === activeCategory
+                  ? "gradient-primary text-primary-foreground shadow-lg shadow-primary/25"
                   : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
               }`}
             >
@@ -120,18 +141,25 @@ export function EventsSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
             whileHover={{ scale: 1.05 }}
-            className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all"
+            whileTap={{ scale: 0.95 }}
+            className="p-2 sm:p-2.5 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all"
           >
-            <Filter className="h-5 w-5" />
+            <SlidersHorizontal className="h-4 w-4 sm:h-5 sm:w-5" />
           </motion.button>
         </motion.div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+        >
           {events.map((event, index) => (
             <EventCard key={event.title} {...event} index={index} />
           ))}
-        </div>
+        </motion.div>
 
         {/* Load More */}
         <motion.div
@@ -139,15 +167,15 @@ export function EventsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-12"
+          className="text-center mt-10 sm:mt-12"
         >
           <Button
             size="lg"
             variant="outline"
-            className="border-border hover:bg-secondary/50 transition-all hover:scale-105 group"
+            className="border-border hover:bg-secondary/50 transition-all hover:scale-105 group px-6 sm:px-8 py-5 sm:py-6"
           >
             View All Events
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
       </div>

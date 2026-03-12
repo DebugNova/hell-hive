@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/navbar"
-import { Hero } from "@/components/hero"
+import HellHiveHero from "@/components/hellhive-hero"
 import { EventsSection } from "@/components/events-section"
 import { FeaturedEvents } from "@/components/featured-events"
 import { GallerySection } from "@/components/gallery-section"
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-x-hidden">
       <Navbar />
-      <Hero />
+      <HellHiveHero />
       <EventsSection />
       <FeaturedEvents />
       <GallerySection />

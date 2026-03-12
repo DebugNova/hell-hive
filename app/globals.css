@@ -61,6 +61,16 @@
   --sidebar-accent-foreground: oklch(0.98 0 0);
   --sidebar-border: oklch(0.25 0 0);
   --sidebar-ring: oklch(0.65 0.25 15);
+
+  /* ======================================================
+     HellHive Custom Color Palette — CRITICAL FOR HERO
+     ====================================================== */
+  --hive-midnight: #0B0B0F;   /* Deep black background */
+  --hive-charcoal: #111117;   /* Slightly lighter dark */
+  --hive-violet:   #6A00FF;   /* Electric purple for glow */
+  --hive-red:      #FF2A2A;   /* Fire red for flame effects */
+  --hive-orange:   #FF6A00;   /* Warm orange for accents */
+  --hive-gold:     #D4A017;   /* Golden amber for honeycomb */
 }
 
 .dark {
@@ -138,6 +148,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 }
 
 @layer base {
@@ -210,7 +222,15 @@
   
   /* Honeycomb pattern */
   .honeycomb-bg {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath fill='%23ff3366' fill-opacity='0.05' d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66ZM28 100L0 84L0 50L28 34L56 50L56 84L28 100Z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='138.564' viewBox='0 0 80 138.564' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ff9900' stroke-width='2.5' stroke-opacity='0.4'%3E%3Cpolygon points='40,8.188 72.91,27.188 72.91,65.188 40,84.188 7.09,65.188 7.09,27.188' /%3E%3Cpolygon points='0,77.47 32.91,96.47 32.91,134.47 0,153.47 -32.91,134.47 -32.91,96.47' /%3E%3Cpolygon points='80,77.47 112.91,96.47 112.91,134.47 80,153.47 47.09,134.47 47.09,96.47' /%3E%3Cpolygon points='0,-61.094 32.91,-42.094 32.91,-4.094 0,14.906 -32.91,-4.094 -32.91,-42.094' /%3E%3Cpolygon points='80,-61.094 112.91,-42.094 112.91,-4.094 80,14.906 47.09,-4.094 47.09,-42.094' /%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 138.564px;
+    filter: drop-shadow(0 0 3px rgba(255, 150, 0, 0.5));
+  }
+
+  /* Hero-specific isometric cube honeycomb pattern - dense 3D wireframe grid */
+  .hero-honeycomb-grid {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23c89020' stroke-width='0.8' stroke-opacity='0.6'%3E%3C!-- Isometric cube top face --%3E%3Cpath d='M50,15 L80,32.5 L50,50 L20,32.5 Z'/%3E%3C!-- Isometric cube left face --%3E%3Cpath d='M20,32.5 L50,50 L50,82 L20,65 Z'/%3E%3C!-- Isometric cube right face --%3E%3Cpath d='M50,50 L80,32.5 L80,65 L50,82 Z'/%3E%3C!-- Inner lines for depth --%3E%3Cline x1='50' y1='50' x2='50' y2='82'/%3E%3Cline x1='50' y1='15' x2='50' y2='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 60px 67px;
   }
 }
 
@@ -242,5 +262,47 @@
   100% {
     transform: translateY(-100px) translateX(20px) scale(0);
     opacity: 0;
+  }
+}
+
+/* ============================================
+   HellHive Custom Keyframe Animations
+   ============================================ */
+@keyframes golden-sweep {
+  0% {
+    transform: translateX(-200%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+.animate-golden-sweep {
+  animation: golden-sweep 4s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
   }
 }

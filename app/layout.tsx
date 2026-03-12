@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk, Pacifico } from 'next/font/google'
+import { Inter, Space_Grotesk, Great_Vibes } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -13,7 +13,7 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk'
 });
 
-const pacifico = Pacifico({ 
+const pacifico = Great_Vibes({ 
   weight: "400",
   subsets: ["latin"],
   variable: '--font-script'

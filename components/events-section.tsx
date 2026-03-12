@@ -80,8 +80,6 @@ export function EventsSection() {
 
   return (
     <section id="discover" className="py-16 sm:py-24 relative">
-      {/* Honeycomb pattern background */}
-      <div className="absolute inset-0 honeycomb-bg opacity-20" />
       
       {/* Background accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-primary/5 rounded-full blur-[128px]" />

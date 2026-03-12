@@ -49,8 +49,6 @@ const itemVariants = {
 export function HowItWorks() {
   return (
     <section id="about" className="py-16 sm:py-24 relative overflow-hidden">
-      {/* Honeycomb pattern background */}
-      <div className="absolute inset-0 honeycomb-bg opacity-15" />
       
       {/* Background accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-accent/5 rounded-full blur-[128px]" />

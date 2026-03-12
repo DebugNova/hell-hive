@@ -40,8 +40,6 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="relative pt-16 sm:pt-24 pb-8 sm:pb-12 border-t border-border">
-      {/* Honeycomb pattern */}
-      <div className="absolute inset-0 honeycomb-bg opacity-10" />
       
       {/* Background gradient */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] sm:w-[800px] h-[200px] sm:h-[400px] bg-primary/5 rounded-full blur-[128px]" />

@@ -37,8 +37,6 @@ const itemVariants = {
 export function HostCTA() {
   return (
     <section id="host" className="py-16 sm:py-24 relative overflow-hidden">
-      {/* Honeycomb pattern */}
-      <div className="absolute inset-0 honeycomb-bg opacity-15" />
       
       {/* Background effects */}
       <div className="absolute inset-0">

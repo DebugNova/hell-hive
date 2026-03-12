@@ -59,16 +59,15 @@ export function Navbar() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="relative"
               >
-                <Flame className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
+                <Flame className="h-7 w-7 sm:h-8 sm:w-8 text-white drop-shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
                 <motion.div 
-                  className="absolute inset-0 blur-lg bg-primary/50 -z-10"
+                  className="absolute inset-0 blur-[15px] bg-[#8B5CF6]/50 -z-10 rounded-full"
                   animate={{ opacity: [0.5, 0.8, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
-              <span className="text-xl sm:text-2xl font-script tracking-wide group-hover:text-glow transition-all duration-300">
-                <span className="text-foreground">Hell</span>
-                <span className="text-flame">Hive</span>
+              <span className="text-xl sm:text-2xl font-sans font-black tracking-[0.1em] text-white uppercase drop-shadow-[0_0_10px_rgba(139,92,246,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all duration-300">
+                HELLHIVE
               </span>
             </Link>
 
@@ -104,7 +103,7 @@ export function Navbar() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button
-                  className="gradient-primary text-primary-foreground font-semibold hover:opacity-90 transition-all shadow-lg shadow-primary/20"
+                  className="bg-[#1A1025]/80 hover:bg-[#2A1845]/90 border border-[#8B5CF6]/40 text-white font-medium hover:opacity-90 transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)]"
                   asChild
                 >
                   <Link href="#host">Host a Party</Link>
@@ -173,10 +172,9 @@ export function Navbar() {
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b border-border/50">
                   <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Flame className="h-7 w-7 text-primary" />
-                    <span className="text-xl font-script">
-                      <span className="text-foreground">Hell</span>
-                      <span className="text-flame">Hive</span>
+                    <Flame className="h-7 w-7 text-white drop-shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
+                    <span className="text-xl font-sans font-black tracking-[0.1em] text-white uppercase drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]">
+                      HELLHIVE
                     </span>
                   </Link>
                   <motion.button
@@ -217,7 +215,7 @@ export function Navbar() {
                     transition={{ delay: 0.4 }}
                   >
                     <Button
-                      className="w-full gradient-primary text-primary-foreground font-semibold py-6 text-base shadow-lg shadow-primary/20"
+                      className="w-full bg-[#1A1025]/80 hover:bg-[#2A1845]/90 border border-[#8B5CF6]/40 text-white font-semibold py-6 text-base shadow-[0_0_15px_rgba(139,92,246,0.15)]"
                       asChild
                     >
                       <Link href="#host" onClick={() => setIsMobileMenuOpen(false)}>

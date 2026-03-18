@@ -53,7 +53,16 @@ export function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link 
+              href="/" 
+              className="flex items-center gap-2 group"
+              onClick={(e) => {
+                if (window.location.pathname === "/") {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+            >
               <motion.div
                 whileHover={{ rotate: 15, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -191,7 +200,17 @@ export function Navbar() {
               <div className="flex flex-col h-full">
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b border-border/50">
-                  <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link 
+                    href="/" 
+                    className="flex items-center gap-2" 
+                    onClick={(e) => {
+                      setIsMobileMenuOpen(false);
+                      if (window.location.pathname === "/") {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
+                  >
                     <Flame className="h-7 w-7 text-white drop-shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
                     <span className="text-xl font-sans font-black tracking-[0.1em] text-white uppercase drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]">
                       HELLHIVE

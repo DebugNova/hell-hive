@@ -93,7 +93,7 @@ export function HostCTA() {
                   <GlassButton
                     variant="primary"
                     className="text-sm sm:text-base md:text-lg !px-8 !py-4 group"
-                    href="/host"
+                    href="/start-hosting"
                   >
                     Start Hosting
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
@@ -101,7 +101,7 @@ export function HostCTA() {
                   <GlassButton
                     variant="secondary"
                     className="text-sm sm:text-base !px-8 !py-4"
-                    href="#learn"
+                    href="/learn-more"
                   >
                     Learn More
                   </GlassButton>

@@ -6,6 +6,7 @@ import { FireBackground } from "@/components/ui/fire-background"
 import { Search, SlidersHorizontal, CalendarDays, Calendar, MapPin, Users, Heart, ArrowRight, Flame } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { BackButton } from "@/components/ui/back-button"
 
@@ -125,9 +126,12 @@ const categories = ["All", "Music", "Nightlife", "Social", "Gaming", "Art", "Net
 
 function EventListItem({ event, index }: { event: any, index: number }) {
   const [isLiked, setIsLiked] = useState(false)
+  const router = useRouter()
+  const eventSlug = event.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
   return (
     <motion.div
+      onClick={() => router.push(`/events/${eventSlug}`)}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -136,7 +140,7 @@ function EventListItem({ event, index }: { event: any, index: number }) {
         delay: index * 0.05,
         ease: [0.25, 0.4, 0.25, 1]
       }}
-      className="group relative flex flex-col sm:flex-row overflow-hidden rounded-2xl bg-[#111116]/80 backdrop-blur-xl border border-white/5 transition-all duration-500 hover:border-[var(--hive-orange)]/50 hover:bg-[#1a1a24]/90 hover:shadow-[0_0_40px_rgba(255,106,0,0.15)] mb-4"
+      className="group cursor-pointer relative flex flex-col sm:flex-row overflow-hidden rounded-2xl bg-[#111116]/80 backdrop-blur-xl border border-white/5 transition-all duration-500 hover:border-[var(--hive-orange)]/50 hover:bg-[#1a1a24]/90 hover:shadow-[0_0_40px_rgba(255,106,0,0.15)] mb-4"
     >
       {/* Dynamic fire edge glow */}
       <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[var(--hive-orange)] to-[var(--hive-red)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -181,8 +185,11 @@ function EventListItem({ event, index }: { event: any, index: number }) {
 
           {/* Like button */}
           <button
-            onClick={() => setIsLiked(!isLiked)}
-            className="shrink-0 p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsLiked(!isLiked)
+            }}
+            className="shrink-0 p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors z-20 relative"
           >
             <Heart 
               className={`h-5 w-5 transition-all duration-300 ${
@@ -204,15 +211,14 @@ function EventListItem({ event, index }: { event: any, index: number }) {
             </span>
           </div>
 
-          <Link href={`/events/${event.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
-            <Button
-              variant="ghost"
-              className="h-auto p-0 text-[var(--hive-orange)] hover:text-white hover:bg-transparent group/btn transition-colors text-sm font-semibold tracking-wide"
-            >
-              Access Event
-              <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+          <Button
+            onClick={(e) => e.stopPropagation()}
+            variant="ghost"
+            className="h-auto p-0 text-[var(--hive-orange)] hover:text-white hover:bg-transparent group/btn transition-colors text-sm font-semibold tracking-wide z-20 relative"
+          >
+            Access Event
+            <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+          </Button>
         </div>
       </div>
     </motion.div>

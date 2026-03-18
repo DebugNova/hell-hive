@@ -5,6 +5,7 @@ import { Calendar, MapPin, Users, ArrowRight, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 interface EventCardProps {
   title: string
@@ -28,9 +29,12 @@ export function EventCard({
   index
 }: EventCardProps) {
   const [isLiked, setIsLiked] = useState(false)
+  const router = useRouter()
+  const eventSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
   return (
     <motion.div
+      onClick={() => router.push(`/events/${eventSlug}`)}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -40,7 +44,7 @@ export function EventCard({
         ease: [0.25, 0.4, 0.25, 1]
       }}
       whileHover={{ y: -8 }}
-      className={`group relative overflow-hidden rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] ${
+      className={`group cursor-pointer relative overflow-hidden rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
@@ -70,7 +74,10 @@ export function EventCard({
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsLiked(!isLiked)
+          }}
           className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:bg-white/20 transition-colors"
         >
           <Heart 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useCallback } from "react"
+import { GlassButton } from "@/components/ui/glass-button"
 
 // ============================================================
 // TYPE: HexCell — represents one cell in the honeycomb grid
@@ -329,69 +330,6 @@ function EmberParticles() {
   )
 }
 
-// ============================================================
-// COMPONENT: GlassButton
-// A frosted-glass styled button with multiple layered effects:
-//   - Backdrop blur + subtle white fill
-//   - Top edge highlight (1px gradient)
-//   - Inner light reflection
-//   - Hover light sweep
-//   - Violet or orange tint based on variant
-// ============================================================
-function GlassButton({
-  children,
-  variant = "primary",
-}: {
-  children: React.ReactNode
-  variant?: "primary" | "secondary"
-}) {
-  return (
-    <button
-      className={`
-        relative px-10 py-4 rounded-full font-bold text-lg tracking-wide
-        backdrop-blur-2xl border border-white/20
-        transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
-        hover:border-white/40 hover:bg-white/10
-        hover:shadow-[0_8px_32px_rgba(0,0,0,0.5),_0_0_20px_rgba(255,255,255,0.1)]
-        hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]
-        group overflow-hidden
-        ${
-          variant === "primary"
-            ? "bg-white/[0.05]"
-            : "bg-transparent"
-        }
-      `}
-      style={{
-        boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.5), inset 0 -1px 0 0 rgba(255,255,255,0.1), inset 0 0 20px rgba(255,255,255,0.05), 0 8px 20px rgba(0,0,0,0.4)",
-        textShadow: "0 2px 4px rgba(0,0,0,0.5)",
-      }}
-    >
-      {/* Top subtle highlight */}
-      <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/80 to-transparent pointer-events-none" />
-      
-      {/* Inner frosted glass top reflection */}
-      <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent opacity-50 pointer-events-none" />
-      
-      {/* Shine sweep effect on hover */}
-      <div 
-        className="absolute top-0 -left-[150%] h-full w-[100%] skew-x-[-25deg] bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:left-[150%] transition-all duration-[1s] ease-in-out pointer-events-none" 
-      />
-      
-      {/* Subtle color tint */}
-      <div 
-        className={`absolute inset-0 opacity-40 pointer-events-none transition-opacity duration-500 group-hover:opacity-60 ${
-          variant === "primary" 
-            ? "bg-gradient-to-br from-[var(--hive-violet)]/40 via-transparent to-[var(--hive-gold)]/20" 
-            : "bg-gradient-to-br from-[var(--hive-orange)]/40 via-transparent to-[var(--hive-red)]/20"
-        }`}
-      />
-      
-      <span className="relative z-10 text-white/95 group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.6)] transition-all duration-300">
-        {children}
-      </span>
-    </button>
-  )
-}
 
 // ============================================================
 // MAIN EXPORT: HellHiveHero

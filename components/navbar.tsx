@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Flame, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { GlassButton } from "@/components/ui/glass-button"
 import Link from "next/link"
 
 const navLinks = [
@@ -102,12 +103,13 @@ export function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button
-                  className="bg-[#1A1025]/80 hover:bg-[#2A1845]/90 border border-[#8B5CF6]/40 text-white font-medium hover:opacity-90 transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)]"
+                <GlassButton
+                  variant="primary"
+                  className="px-6 py-2 text-sm !h-auto"
                   asChild
                 >
                   <Link href="#host">Host a Party</Link>
-                </Button>
+                </GlassButton>
               </motion.div>
             </div>
 
@@ -214,14 +216,15 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <Button
-                      className="w-full bg-[#1A1025]/80 hover:bg-[#2A1845]/90 border border-[#8B5CF6]/40 text-white font-semibold py-6 text-base shadow-[0_0_15px_rgba(139,92,246,0.15)]"
+                    <GlassButton
+                      variant="primary"
+                      className="w-full text-base !py-3"
                       asChild
                     >
                       <Link href="#host" onClick={() => setIsMobileMenuOpen(false)}>
                         Host a Party
                       </Link>
-                    </Button>
+                    </GlassButton>
                   </motion.div>
                 </div>
               </div>

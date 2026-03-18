@@ -40,7 +40,7 @@ export function EventCard({
         ease: [0.25, 0.4, 0.25, 1]
       }}
       whileHover={{ y: -8 }}
-      className={`group relative overflow-hidden rounded-2xl bg-card border border-border transition-all duration-500 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 ${
+      className={`group relative overflow-hidden rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
@@ -61,7 +61,7 @@ export function EventCard({
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 + index * 0.1 }}
-          className="absolute top-3 sm:top-4 left-3 sm:left-4 px-3 py-1.5 rounded-full glass text-xs font-medium text-foreground"
+          className="absolute top-3 sm:top-4 left-3 sm:left-4 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-xs font-medium text-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
         >
           {category}
         </motion.div>
@@ -71,45 +71,45 @@ export function EventCard({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsLiked(!isLiked)}
-          className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-full glass hover:bg-primary/20 transition-colors"
+          className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:bg-white/20 transition-colors"
         >
           <Heart 
             className={`h-4 w-4 transition-colors ${
-              isLiked ? "fill-primary text-primary" : "text-foreground/70"
+              isLiked ? "fill-[var(--hive-red)] text-[var(--hive-red)] drop-shadow-[0_0_8px_rgba(255,42,42,0.6)]" : "text-white/70"
             }`} 
           />
         </motion.button>
         
         {/* Hover glow effect */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-[var(--hive-orange)]/20 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
       <div className={`relative p-4 sm:p-5 ${featured ? "md:absolute md:bottom-0 md:left-0 md:right-0 md:p-6 lg:p-8" : ""}`}>
-        <h3 className={`font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2 ${
+        <h3 className={`font-bold text-white mb-2 sm:mb-3 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.6)] transition-all duration-300 line-clamp-2 ${
           featured ? "text-xl sm:text-2xl md:text-3xl" : "text-base sm:text-lg"
         }`}>
           {title}
         </h3>
         
-        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-white/60 mb-3 sm:mb-4">
           <div className="flex items-center gap-1.5">
-            <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+            <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/50" />
             <span>{date}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+            <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/50" />
             <span>{location}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+            <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/50" />
             <span>{attendees.toLocaleString()} attending</span>
           </div>
         </div>
 
         <Button
           variant="ghost"
-          className="p-0 h-auto text-primary hover:text-primary/80 hover:bg-transparent group/btn text-sm"
+          className="p-0 h-auto text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.8)] hover:bg-transparent group/btn text-sm transition-all duration-300"
         >
           View Event
           <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />

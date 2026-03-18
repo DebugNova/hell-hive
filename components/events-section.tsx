@@ -3,7 +3,9 @@
 import { motion } from "framer-motion"
 import { EventCard } from "./event-card"
 import { Button } from "@/components/ui/button"
+import { GlassButton } from "@/components/ui/glass-button"
 import { ArrowRight, Filter, SlidersHorizontal } from "lucide-react"
+import { FireBackground } from "@/components/ui/fire-background"
 import { useState } from "react"
 
 const events = [
@@ -81,12 +83,7 @@ export function EventsSection() {
   return (
     <section id="discover" className="py-16 sm:py-24 relative">
       
-      {/* Background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-primary/5 rounded-full blur-[128px]" />
-      
-      {/* Flame accents */}
-      <div className="absolute top-20 left-8 w-4 h-8 gradient-flame rounded-full blur-sm opacity-30 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
-      <div className="absolute bottom-40 right-12 w-3 h-6 gradient-flame rounded-full blur-sm opacity-25 animate-pulse" style={{ animationDelay: "0.5s", borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+      <FireBackground />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -101,14 +98,14 @@ export function EventsSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block text-primary text-xs sm:text-sm font-semibold uppercase tracking-widest mb-3"
+            className="inline-block text-white/50 text-xs sm:text-sm font-semibold uppercase tracking-widest mb-3"
           >
             Discover
           </motion.span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
             Trending Events
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto text-pretty px-4">
+          <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto text-pretty px-4">
             From underground raves to rooftop socials, find the perfect event that matches your vibe.
           </p>
         </motion.div>
@@ -133,8 +130,8 @@ export function EventsSection() {
               onClick={() => setActiveCategory(category)}
               className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                 category === activeCategory
-                  ? "gradient-primary text-primary-foreground shadow-lg shadow-primary/25"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  ? "bg-[var(--hive-red)]/20 text-white shadow-[0_0_15px_rgba(255,42,42,0.4)] border border-[var(--hive-red)]/50"
+                  : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-transparent backdrop-blur-sm"
               }`}
             >
               {category}
@@ -147,7 +144,7 @@ export function EventsSection() {
             transition={{ delay: 0.4 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="p-2 sm:p-2.5 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all"
+            className="p-2 sm:p-2.5 rounded-full bg-white/5 text-white/70 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all border border-transparent hover:border-white/10"
           >
             <SlidersHorizontal className="h-4 w-4 sm:h-5 sm:w-5" />
           </motion.button>
@@ -174,14 +171,15 @@ export function EventsSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-10 sm:mt-12"
         >
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-border hover:bg-secondary/50 transition-all hover:scale-105 group px-6 sm:px-8 py-5 sm:py-6"
+          <GlassButton
+            variant="primary"
+            className="group px-8 sm:px-10 py-4 sm:py-5"
           >
-            View All Events
-            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+            <span className="flex items-center">
+              View All Events
+              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </GlassButton>
         </motion.div>
       </div>
     </section>

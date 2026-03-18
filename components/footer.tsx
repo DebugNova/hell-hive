@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Flame, Twitter, Instagram, Facebook, Youtube, Mail, Send } from "lucide-react"
+import { FireBackground } from "@/components/ui/fire-background"
 import Link from "next/link"
 
 const footerLinks = {
@@ -41,11 +42,7 @@ export function Footer() {
   return (
     <footer className="relative pt-16 sm:pt-24 pb-8 sm:pb-12 border-t border-border">
       
-      {/* Background gradient */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[400px] sm:w-[800px] h-[200px] sm:h-[400px] bg-primary/5 rounded-full blur-[128px]" />
-      
-      {/* Flame accents */}
-      <div className="absolute top-20 right-10 w-3 h-6 gradient-flame rounded-full blur-sm opacity-20 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+      <FireBackground />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Newsletter - Mobile first placement */}
@@ -53,12 +50,12 @@ export function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass rounded-2xl p-5 sm:p-6 md:p-8 mb-10 sm:mb-16"
+          className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8 mb-10 sm:mb-16 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
             <div className="mb-4 md:mb-0">
-              <h4 className="text-base sm:text-lg font-semibold text-foreground mb-1">Stay in the loop</h4>
-              <p className="text-xs sm:text-sm text-muted-foreground">Get the latest events and exclusive offers delivered to your inbox.</p>
+              <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Stay in the loop</h4>
+              <p className="text-xs sm:text-sm text-white/60">Get the latest events and exclusive offers delivered to your inbox.</p>
             </div>
             <div className="flex gap-2 sm:gap-3 w-full md:w-auto">
               <div className="relative flex-1 md:w-64">
@@ -66,13 +63,13 @@ export function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg bg-input border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all backdrop-blur-md"
                 />
               </div>
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-4 sm:px-6 py-2.5 sm:py-3 gradient-primary text-primary-foreground font-semibold text-sm rounded-lg hover:opacity-90 transition-all flex items-center gap-2"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-[var(--hive-red)] to-[var(--hive-orange)] shadow-[0_0_15px_rgba(255,42,42,0.4)] text-white font-semibold text-sm rounded-lg hover:opacity-90 transition-all flex items-center gap-2"
               >
                 <span className="hidden sm:inline">Subscribe</span>
                 <Send className="h-4 w-4 sm:hidden" />
@@ -90,19 +87,19 @@ export function Footer() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="relative"
               >
-                <Flame className="h-7 w-7 sm:h-8 sm:w-8 text-primary" />
+                <Flame className="h-7 w-7 sm:h-8 sm:w-8 text-[var(--hive-orange)]" />
                 <motion.div 
-                  className="absolute inset-0 blur-lg bg-primary/50 -z-10"
+                  className="absolute inset-0 blur-lg bg-[var(--hive-orange)]/50 -z-10"
                   animate={{ opacity: [0.3, 0.6, 0.3] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
-              <span className="text-xl sm:text-2xl font-script tracking-wide group-hover:text-glow transition-all">
-                <span className="text-foreground">Hell</span>
-                <span className="text-flame">Hive</span>
+              <span className="text-xl sm:text-2xl font-sans font-black tracking-[0.1em] text-white uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300">
+                <span className="text-white">HELL</span>
+                <span className="text-white">HIVE</span>
               </span>
             </Link>
-            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-xs">
+            <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-xs">
               The premium event marketplace for discovering and hosting unforgettable experiences.
             </p>
             
@@ -114,7 +111,7 @@ export function Footer() {
                   href={social.href}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors backdrop-blur-sm"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -125,13 +122,13 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold text-foreground text-sm sm:text-base mb-3 sm:mb-4">Product</h4>
+            <h4 className="font-semibold text-white text-sm sm:text-base mb-3 sm:mb-4">Product</h4>
             <ul className="space-y-2 sm:space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -141,13 +138,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-foreground text-sm sm:text-base mb-3 sm:mb-4">Company</h4>
+            <h4 className="font-semibold text-white text-sm sm:text-base mb-3 sm:mb-4">Company</h4>
             <ul className="space-y-2 sm:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -157,13 +154,13 @@ export function Footer() {
           </div>
 
           <div className="hidden sm:block">
-            <h4 className="font-semibold text-foreground text-sm sm:text-base mb-3 sm:mb-4">Resources</h4>
+            <h4 className="font-semibold text-white text-sm sm:text-base mb-3 sm:mb-4">Resources</h4>
             <ul className="space-y-2 sm:space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -173,13 +170,13 @@ export function Footer() {
           </div>
 
           <div className="hidden md:block">
-            <h4 className="font-semibold text-foreground text-sm sm:text-base mb-3 sm:mb-4">Legal</h4>
+            <h4 className="font-semibold text-white text-sm sm:text-base mb-3 sm:mb-4">Legal</h4>
             <ul className="space-y-2 sm:space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -191,11 +188,11 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-border">
-          <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
+          <p className="text-xs sm:text-sm text-white/60 text-center sm:text-left">
             © 2026 HellHive. All rights reserved.
           </p>
           <div className="flex items-center gap-4 sm:gap-6">
-            <span className="text-xs sm:text-sm text-muted-foreground text-center">Made with passion for party lovers</span>
+            <span className="text-xs sm:text-sm text-white/60 text-center">Made with passion for party lovers</span>
           </div>
         </div>
       </div>

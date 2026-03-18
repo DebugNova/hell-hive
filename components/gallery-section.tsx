@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { FireBackground } from "@/components/ui/fire-background"
 import Image from "next/image"
 
 const galleryImages = [
@@ -50,7 +51,8 @@ export function GallerySection() {
   return (
     <section id="gallery" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
+      <div className="absolute inset-0 bg-black pointer-events-none" />
+      <FireBackground />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -61,11 +63,11 @@ export function GallerySection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-accent text-sm font-semibold uppercase tracking-widest">Gallery</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-3 mb-4">
+          <span className="text-white/50 text-sm font-semibold uppercase tracking-widest">Gallery</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
             Moments That Matter
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">
+          <p className="text-white/60 text-lg max-w-2xl mx-auto text-pretty">
             Relive the energy, the connections, and the unforgettable nights that define HellHive experiences.
           </p>
         </motion.div>
@@ -99,11 +101,11 @@ export function GallerySection() {
                 whileHover={{ opacity: 1, y: 0 }}
                 className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-all duration-500"
               >
-                <span className="text-sm text-foreground font-medium">{image.alt}</span>
+                <span className="text-sm text-white font-medium">{image.alt}</span>
               </motion.div>
 
               {/* Glow effect on hover */}
-              <div className="absolute inset-0 ring-2 ring-primary/0 group-hover:ring-primary/50 transition-all duration-500 rounded-xl" />
+              <div className="absolute inset-0 ring-2 ring-transparent group-hover:ring-[var(--hive-red)]/40 group-hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] transition-all duration-500 rounded-xl pointer-events-none" />
             </motion.div>
           ))}
         </div>

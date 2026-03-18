@@ -1,6 +1,7 @@
 "use client"
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { motion } from "motion/react";
+import { FireBackground } from "@/components/ui/fire-background";
 
 const testimonials = [
   {
@@ -65,11 +66,10 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="bg-background my-20 relative pt-16 sm:py-24">
+    <section id="testimonials" className="my-20 relative pt-16 sm:py-24">
       {/* Background constraints from old section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background pointer-events-none" />
-      <div className="absolute z-0 top-1/4 left-6 w-3 h-6 gradient-flame rounded-full blur-sm opacity-25 animate-pulse" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
-      <div className="absolute z-0 bottom-1/3 right-8 w-4 h-8 gradient-flame rounded-full blur-sm opacity-30 animate-pulse" style={{ animationDelay: "0.6s", borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+      <div className="absolute inset-0 bg-black pointer-events-none" />
+      <FireBackground />
 
       <div className="container z-10 mx-auto relative flex flex-col items-center mb-12 px-4">
         <motion.div
@@ -80,13 +80,13 @@ export function TestimonialsSection() {
           className="flex flex-col items-center justify-center max-w-[540px] mx-auto text-center"
         >
           <div className="flex justify-center mb-3">
-            <span className="inline-block text-primary text-xs sm:text-sm font-semibold uppercase tracking-widest py-1 px-4 border border-white/10 bg-card/40 backdrop-blur-md rounded-lg">Testimonials</span>
+            <span className="inline-block text-white/50 text-xs sm:text-sm font-semibold uppercase tracking-widest py-1 px-4 border border-white/10 bg-white/5 backdrop-blur-md rounded-lg">Testimonials</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 tracking-tighter">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tighter">
             What our users say
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto text-pretty mt-2">
+          <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto text-pretty mt-2">
             See what our customers have to say about us.
           </p>
         </motion.div>

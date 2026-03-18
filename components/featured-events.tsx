@@ -147,12 +147,10 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
             <GlassButton
               variant="primary"
               className="group/btn pt-3 pb-3 px-8"
-              asChild
+              href="#"
             >
-              <Link href="#">
-                Get Tickets
-                <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
-              </Link>
+              Get Tickets
+              <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
             </GlassButton>
           </motion.div>
         </div>
@@ -185,11 +183,15 @@ export function FeaturedEvents() {
           </p>
         </motion.div>
 
-        {/* Featured Events */}
-        <div className="space-y-24">
-          {featuredEvents.map((event, index) => (
-            <FeaturedEventCard key={event.title} event={event} index={index} />
-          ))}
+        {/* Featured Events Wrapper */}
+        <div className="mt-12 p-6 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          
+          <div className="space-y-24 relative z-10">
+            {featuredEvents.map((event, index) => (
+              <FeaturedEventCard key={event.title} event={event} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

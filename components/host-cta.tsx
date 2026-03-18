@@ -30,7 +30,7 @@ const itemVariants = {
     x: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut",
+      ease: "easeOut" as any,
     },
   },
 }
@@ -44,10 +44,11 @@ export function HostCTA() {
       <FireBackground />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden">
+        <div className="relative rounded-[2.5rem] overflow-hidden">
           {/* Glass card */}
-          <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-6 sm:p-8 md:p-12 lg:p-16 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
+          <div className="bg-[#0a0a0e]/60 backdrop-blur-md border border-white/5 p-6 sm:p-8 md:p-12 lg:p-16 shadow-2xl">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
               {/* Content */}
               <div>
                 <motion.span
@@ -92,19 +93,17 @@ export function HostCTA() {
                   <GlassButton
                     variant="primary"
                     className="text-sm sm:text-base md:text-lg !px-8 !py-4 group"
-                    asChild
+                    href="/host"
                   >
-                    <Link href="/host">
-                      Start Hosting
-                      <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
+                    Start Hosting
+                    <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                   </GlassButton>
                   <GlassButton
                     variant="secondary"
                     className="text-sm sm:text-base !px-8 !py-4"
-                    asChild
+                    href="#learn"
                   >
-                    <Link href="#learn">Learn More</Link>
+                    Learn More
                   </GlassButton>
                 </motion.div>
               </div>
@@ -135,8 +134,8 @@ export function HostCTA() {
             </div>
           </div>
 
-          {/* Border glow */}
-          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl ring-1 ring-primary/20 pointer-events-none" />
+          {/* Border glow / no extra ring to match other cards */}
+          <div className="absolute inset-0 rounded-[2.5rem] pointer-events-none" />
         </div>
       </div>
     </section>

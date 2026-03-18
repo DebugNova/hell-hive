@@ -110,77 +110,85 @@ export function EventsSection() {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
-        >
-          {categories.map((category, index) => (
-            <motion.button
-              key={category}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+        {/* Events Content Wrapper */}
+        <div className="mt-8 sm:mt-12 p-4 sm:p-8 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          
+          <div className="relative z-10 w-full overflow-hidden sm:overflow-visible">
+            {/* Category Filter */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 + index * 0.05 }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
-                category === activeCategory
-                  ? "bg-[var(--hive-red)]/20 text-white shadow-[0_0_15px_rgba(255,42,42,0.4)] border border-[var(--hive-red)]/50"
-                  : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-transparent backdrop-blur-sm"
-              }`}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
             >
-              {category}
-            </motion.button>
-          ))}
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="p-2 sm:p-2.5 rounded-full bg-white/5 text-white/70 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all border border-transparent hover:border-white/10"
-          >
-            <SlidersHorizontal className="h-4 w-4 sm:h-5 sm:w-5" />
-          </motion.button>
-        </motion.div>
-
-        {/* Events Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-        >
-          {events.map((event, index) => (
-            <EventCard key={event.title} {...event} index={index} />
-          ))}
-        </motion.div>
-
-        {/* Load More */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-10 sm:mt-12"
-        >
-          <GlassButton
-            variant="primary"
-            className="group px-8 sm:px-10 py-4 sm:py-5"
-          >
-            <span className="flex items-center">
-              View All Events
-              <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </GlassButton>
-        </motion.div>
+              {categories.map((category, index) => (
+                <motion.button
+                  key={category}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 + index * 0.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setActiveCategory(category)}
+                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                    category === activeCategory
+                      ? "bg-[var(--hive-red)]/20 text-white shadow-[0_0_15px_rgba(255,42,42,0.4)] border border-[var(--hive-red)]/50"
+                      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-transparent backdrop-blur-sm"
+                  }`}
+                >
+                  {category}
+                </motion.button>
+              ))}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 sm:p-2.5 rounded-full bg-white/5 text-white/70 hover:bg-white/10 hover:text-white backdrop-blur-sm transition-all border border-transparent hover:border-white/10"
+              >
+                <SlidersHorizontal className="h-4 w-4 sm:h-5 sm:w-5" />
+              </motion.button>
+            </motion.div>
+    
+            {/* Events Grid */}
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+            >
+              {events.map((event, index) => (
+                <EventCard key={event.title} {...event} index={index} />
+              ))}
+            </motion.div>
+    
+            {/* Load More */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center mt-10 sm:mt-12"
+            >
+              <GlassButton
+                variant="primary"
+                className="group px-8 sm:px-10 py-4 sm:py-5 border border-[var(--hive-orange)]/50 shadow-[0_0_30px_rgba(255,106,0,0.4)] hover:shadow-[0_0_50px_rgba(255,106,0,0.8)] bg-gradient-to-r from-[var(--hive-orange)]/20 via-transparent to-[var(--hive-orange)]/20 hover:border-[var(--hive-orange)] transition-all duration-500"
+                href="/events"
+              >
+                <span className="flex items-center text-white drop-shadow-[0_0_10px_rgba(255,106,0,0.8)] font-bold tracking-wider">
+                  View All Events
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 text-[var(--hive-orange)] group-hover:translate-x-1 transition-transform" />
+                </span>
+              </GlassButton>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

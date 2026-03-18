@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Flame, ArrowRight } from "lucide-react"
+import { Menu, X, Flame, ArrowRight, Heart, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GlassButton } from "@/components/ui/glass-button"
 import Link from "next/link"
@@ -94,56 +94,74 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* CTA Button */}
-            <div className="hidden md:block">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            {/* Right Side Actions */}
+            <div className="flex items-center justify-end gap-1 sm:gap-4">
+              {/* Action Icons */}
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex items-center gap-1"
               >
-                <GlassButton
-                  variant="primary"
-                  className="px-6 py-2 text-sm !h-auto"
-                  asChild
-                >
-                  <Link href="#host">Host a Party</Link>
-                </GlassButton>
+                <Link href="/favorites" className="p-2 text-white/70 hover:text-[var(--hive-orange)] hover:bg-white/10 rounded-full transition-all duration-300">
+                  <Heart className="h-5 w-5" />
+                </Link>
+                <Link href="/profile" className="p-2 text-white/70 hover:text-[var(--hive-orange)] hover:bg-white/10 rounded-full transition-all duration-300">
+                  <User className="h-5 w-5" />
+                </Link>
               </motion.div>
-            </div>
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-foreground rounded-lg hover:bg-secondary/50 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <AnimatePresence mode="wait">
-                {isMobileMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+              {/* CTA Button */}
+              <div className="hidden md:block">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <GlassButton
+                    variant="primary"
+                    className="px-6 py-2 text-sm !h-auto"
+                    href="#host"
                   >
-                    <X className="h-6 w-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-6 w-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
+                    Host a Party
+                  </GlassButton>
+                </motion.div>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 text-foreground rounded-lg hover:bg-secondary/50 transition-colors"
+                aria-label="Toggle menu"
+              >
+                <AnimatePresence mode="wait">
+                  {isMobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="h-6 w-6" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu className="h-6 w-6" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -219,11 +237,10 @@ export function Navbar() {
                     <GlassButton
                       variant="primary"
                       className="w-full text-base !py-3"
-                      asChild
+                      href="#host"
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <Link href="#host" onClick={() => setIsMobileMenuOpen(false)}>
-                        Host a Party
-                      </Link>
+                      Host a Party
                     </GlassButton>
                   </motion.div>
                 </div>

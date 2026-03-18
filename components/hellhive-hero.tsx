@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useCallback } from "react"
-import { GlassButton } from "@/components/ui/glass-button"
+import Link from "next/link"
 
 // ============================================================
 // TYPE: HexCell — represents one cell in the honeycomb grid
@@ -332,6 +332,42 @@ function EmberParticles() {
 
 
 // ============================================================
+// COMPONENT: HeroAnimatedButton
+// Custom button exclusively for the Hero section, featuring a 
+// looping animated border and a cool diffuse glow.
+// ============================================================
+function HeroAnimatedButton({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <div className="group relative inline-flex w-full sm:w-auto">
+      {/* Cool external diffuse blur glow */}
+      <div className="absolute -inset-1 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-1000 pointer-events-none" />
+      
+      {/* Animated border wrapper */}
+      <div className="relative inline-flex w-full sm:w-auto overflow-hidden rounded-full p-[1px] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        {/* Spinning conic gradient border */}
+        <span 
+          className="absolute left-1/2 top-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+          style={{ background: "conic-gradient(from 0deg, transparent 70%, rgba(255,255,255,0.8) 100%)" }}
+        />
+        
+        {/* Inner Button Content */}
+        <Link
+          href={href}
+          className="relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-full bg-[#0a0a0e]/95 backdrop-blur-2xl text-white font-semibold tracking-wide transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-white/[0.05] hover:scale-[1.02] active:scale-[0.98]"
+        >
+          {/* Subtle top edge highlight */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-30 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none" />
+          
+          <span className="relative z-10 text-white/90 group-hover:text-white transition-colors duration-500 flex items-center justify-center gap-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
+            {children}
+          </span>
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
 // MAIN EXPORT: HellHiveHero
 // The complete hero section with all visual layers stacked
 // using absolute positioning.
@@ -376,9 +412,9 @@ export default function HellHiveHero() {
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-          <GlassButton variant="primary">Discover Parties</GlassButton>
-          <GlassButton variant="secondary">Host a Party</GlassButton>
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-6 relative z-20">
+          <HeroAnimatedButton href="#discover">Discover Parties</HeroAnimatedButton>
+          <HeroAnimatedButton href="#host">Host a Party</HeroAnimatedButton>
         </div>
       </div>
 

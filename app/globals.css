@@ -232,6 +232,15 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23c89020' stroke-width='0.8' stroke-opacity='0.6'%3E%3C!-- Isometric cube top face --%3E%3Cpath d='M50,15 L80,32.5 L50,50 L20,32.5 Z'/%3E%3C!-- Isometric cube left face --%3E%3Cpath d='M20,32.5 L50,50 L50,82 L20,65 Z'/%3E%3C!-- Isometric cube right face --%3E%3Cpath d='M50,50 L80,32.5 L80,65 L50,82 Z'/%3E%3C!-- Inner lines for depth --%3E%3Cline x1='50' y1='50' x2='50' y2='82'/%3E%3Cline x1='50' y1='15' x2='50' y2='50'/%3E%3C/g%3E%3C/svg%3E");
     background-size: 60px 67px;
   }
+
+  /* Hide scrollbar for horizontal scroll containers */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Flame animation keyframes */

@@ -147,7 +147,7 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
             <GlassButton
               variant="primary"
               className="group/btn pt-3 pb-3 px-8"
-              href="#"
+              href={`/events/${event.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
             >
               Get Tickets
               <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />

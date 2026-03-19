@@ -178,9 +178,9 @@
 > - Active category glows red (`var(--hive-red)`) with a border glow effect
 > - Filter tab state is local React state (`useState`) — note: **filtering is UI-only**, the grid doesn't actually filter yet (all events always show regardless of tab)
 > 
-> **📐 Layout:** Responsive CSS grid: 1-column → 2-column → 3-column
+> **📐 Layout:** Responsive CSS grid: 1-column → 2-column → 3-column. Vertical padding reduced for better mobile flow (`py-10 sm:py-16`). Section headers use `text-4xl` to `text-6xl`, `font-extrabold`, and `tracking-tight`.
 > 
-> **⬇️ At the bottom:** "View All Events" glass button (links to nothing yet)
+> **✨ Components:** Cards and filters are wrapped in a shared glassmorphism container with `rounded-[2rem]`, `backdrop-blur-md`, and a subtle `border-white/5`.
 
 <br>
 
@@ -198,10 +198,10 @@
 > 
 > **📐 Layout per Card:**
 > - `md:grid-cols-2` even/odd alternating: odd indices flip image to the right
-> - Large hero image (`h-[500px]`) with zoom-on-hover effect
+> - Optimized hero image height: `h-[200px] sm:h-[250px] md:h-[320px]` (Reduced from 500px for better mobile balance) with zoom-on-hover effect
 > - "Featured" badge with gold sparkle icon
 > - Orange-tinted tag pills (category labels)
-> - Text block with title, description, date/location/attendees metadata
+> - Text block with title (`text-2xl` to `text-4xl`), description, date/location/attendees metadata
 > - "Get Tickets" glass button
 > 
 > **✨ Parallax Effect:** Uses `framer-motion`'s `useScroll` + `useTransform` — card slightly moves up/down (±50px) and scales (0.95 → 1 → 0.95) as it enters and exits the viewport.
@@ -239,9 +239,9 @@
 > | 02 | `Ticket` | **Join** | Reserve your spot instantly. No hassle, no waiting. Just tap and you're in. |
 > | 03 | `PartyPopper` | **Experience** | Show up, connect with amazing people, create memories that last a lifetime. |
 > 
-> **📐 Layout:** 3-column grid on desktop, stacked vertically on mobile
+> **📐 Layout:** 3-column grid on desktop, stacked vertically on mobile. Section padding reduced to `py-12 sm:py-20`.
 > 
-> **🔗 Connectors:** Animated horizontal lines between steps (desktop) / vertical lines (mobile) with orange gradient and arrow icons, grow in using `scaleX` / `scaleY` animation
+> **🔗 Connectors:** Animated horizontal lines between steps (desktop) / vertical lines (mobile) with orange gradient and arrow icons, grow in using `scaleX` / `scaleY` animation.
 
 <br>
 
@@ -606,16 +606,16 @@ Two glass utility classes are defined in `globals.css`:
 > - [x] Animated navbar with scroll-aware glass effect + mobile menu
 > - [x] Hero section with interactive canvas honeycomb + ember particles
 > - [x] Trending events grid with category filter UI (visual only)
-> - [x] Featured events with parallax scroll
+> - [x] Featured events with parallax scroll and optimized image heights
 > - [x] Masonry photo gallery with hover effects
-> - [x] How It Works 3-step explainer
+> - [x] How It Works 3-step explainer with reduced flame intensity
 > - [x] Testimonials auto-scroll columns
 > - [x] Host CTA with benefits grid
 > - [x] Footer with newsletter input + social links
-> - [x] Glassmorphism design system
+> - [x] Glassmorphism design system with consistent `rounded-[2rem]` section wrappers
 > - [x] Full dark mode (enforced via `<html class="dark">`)
 > - [x] Vercel Analytics integration
-> - [x] Responsive design (mobile, tablet, desktop)
+> - [x] Responsive design (mobile, tablet, desktop) with optimized spacing and typography
 
 ### 🚧 Not Yet Built (Stubs / Planned)
 

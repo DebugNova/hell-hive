@@ -43,6 +43,51 @@ const eventDetailsDb: Record<string, any> = {
     lineup: ["Acoustic Sunset Band", "DJ Chill House"],
     tags: ["Networking", "21+", "Cocktails", "Dress to Impress"],
     host: "Elite Networkers"
+  },
+  "electric-dreams-festival": {
+    title: "Electric Dreams Festival",
+    date: "April 15-17, 2026",
+    time: "4:00 PM - 2:00 AM Daily",
+    location: "Las Vegas, NV",
+    fullAddress: "Las Vegas Motor Speedway, Las Vegas, NV",
+    attendees: 5000,
+    price: "$299.00",
+    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600&q=80",
+    category: "Festival",
+    description: "Three days of non-stop electronic music featuring world-renowned DJs, immersive art installations, and breathtaking pyrotechnics. Electric Dreams is more than a festival; it's a journey into sound and light under the electric sky.",
+    lineup: ["Armin van Buren", "Tiësto", "Zedd", "Illenium", "Subtronics"],
+    tags: ["Festival", "EDM", "Multi-day", "18+"],
+    host: "Insomniac Events"
+  },
+  "midnight-masquerade": {
+    title: "Midnight Masquerade",
+    date: "March 31, 2026",
+    time: "9:00 PM - 3:00 AM",
+    location: "The Grand Ballroom, NYC",
+    fullAddress: "The Plaza Hotel, 5th Avenue at Central Park South, New York, NY",
+    attendees: 800,
+    price: "$150.00",
+    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1600&q=80",
+    category: "Exclusive",
+    description: "An exclusive masquerade ball with live orchestral performances, premium cocktails, and a strictly enforced black-tie dress code. Step into a world of elegance and mystery where identities are hidden and the night is yours.",
+    lineup: ["New York Symphony Quartet", "DJ Phantom", "Live Jazz Ensemble"],
+    tags: ["Exclusive", "Black Tie", "Live Music", "21+"],
+    host: "Elite Soirées"
+  },
+  "sunset-yacht-party": {
+    title: "Sunset Yacht Party",
+    date: "April 8, 2026",
+    time: "4:00 PM - 10:00 PM",
+    location: "Miami Harbor",
+    fullAddress: "Bayside Marketplace Marina, 401 Biscayne Blvd, Miami, FL",
+    attendees: 200,
+    price: "$250.00",
+    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&q=80",
+    category: "VIP",
+    description: "Sail into the sunset with Miami's best DJs, a premium open bar, and unforgettable ocean views aboard a multi-million dollar luxury yacht. Experience the ultimate VIP lifestyle, incredible music, and perfect vibes as day turns into night on the open water.",
+    lineup: ["DJ Ocean Breeze", "Miami House Mafia", "Saxophone Live"],
+    tags: ["VIP", "Yacht", "Sunset", "Open Bar", "21+"],
+    host: "Miami Vice Events"
   }
 }
 

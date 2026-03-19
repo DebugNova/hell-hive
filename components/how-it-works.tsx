@@ -44,51 +44,95 @@ export function HowItWorks() {
         <FireBackground />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" ref={containerRef}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-left mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4"
-        >
-          <div>
-            <motion.span 
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-block text-[var(--hive-gold)] text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 drop-shadow-[0_0_8px_rgba(212,160,23,0.8)]"
-            >
-              The Journey
-            </motion.span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-[0.9]">
-              How It <br className="hidden sm:block md:hidden" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--hive-orange)] to-[var(--hive-gold)] drop-shadow-[0_0_15px_rgba(255,106,0,0.4)] ml-2 md:ml-0">
-                Unfolds
-              </span>
-            </h2>
-          </div>
-        </motion.div>
-
-        {/* Timeline Container */}
-        <div className="relative mx-auto md:ml-4">
-          {/* Background Track */}
-          <div className="absolute left-[19px] md:left-[23px] top-4 bottom-[-20px] w-[2px] bg-white/10" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={containerRef}>
+        <div className="flex flex-col lg:flex-row lg:items-center gap-12 xl:gap-20">
           
-          {/* Animated Glowing Line */}
-          <motion.div 
-            className="absolute left-[19px] md:left-[23px] top-4 w-[2px] bg-gradient-to-b from-[var(--hive-gold)] via-[var(--hive-orange)] to-[var(--hive-red)] shadow-[0_0_10px_rgba(255,106,0,0.8)] origin-top z-10 rounded-full"
-            style={{ height: lineHeight }}
-          />
-
-          {/* Steps */}
-          <div className="flex flex-col gap-12 md:gap-16 relative z-20">
-            {steps.map((step, index) => (
-              <StepItem key={step.title} step={step} index={index} />
-            ))}
+          {/* Left Side: Pictures Stack (Only visible on PC view, hidden on mobile) */}
+          <div className="hidden lg:block relative w-full lg:w-1/2 h-[500px] xl:h-[600px] shrink-0">
+            {/* Picture 1 */}
+            <motion.div 
+              initial={{ opacity: 0, x: -40, y: -20 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="absolute top-0 left-0 w-[65%] h-[70%] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(212,160,23,0.15)] z-20 group"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=1000&auto=format&fit=crop" 
+                alt="Crowd at a nightlife event"
+                loading="lazy"
+                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-1000 ease-in-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+            </motion.div>
+            
+            {/* Picture 2 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 40, y: 20 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              className="absolute bottom-6 right-6 w-[60%] h-[65%] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(255,106,0,0.15)] z-10 group"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop" 
+                alt="DJ hands in the air"
+                loading="lazy"
+                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-1000 ease-in-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+            </motion.div>
           </div>
+
+          {/* Right Side: Timeline and Content */}
+          <div className="w-full lg:w-1/2">
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-left mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4"
+            >
+              <div>
+                <motion.span 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="inline-block text-[var(--hive-gold)] text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 drop-shadow-[0_0_8px_rgba(212,160,23,0.8)]"
+                >
+                  The Journey
+                </motion.span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-[0.9]">
+                  How It <br className="hidden sm:block md:hidden" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--hive-orange)] to-[var(--hive-gold)] drop-shadow-[0_0_15px_rgba(255,106,0,0.4)] ml-2 md:ml-0">
+                    Unfolds
+                  </span>
+                </h2>
+              </div>
+            </motion.div>
+
+            {/* Timeline Container */}
+            <div className="relative mx-auto md:ml-4">
+              {/* Background Track */}
+              <div className="absolute left-[19px] md:left-[23px] top-4 bottom-[-20px] w-[2px] bg-white/10" />
+              
+              {/* Animated Glowing Line */}
+              <motion.div 
+                className="absolute left-[19px] md:left-[23px] top-4 w-[2px] bg-gradient-to-b from-[var(--hive-gold)] via-[var(--hive-orange)] to-[var(--hive-red)] shadow-[0_0_10px_rgba(255,106,0,0.8)] origin-top z-10 rounded-full"
+                style={{ height: lineHeight }}
+              />
+
+              {/* Steps */}
+              <div className="flex flex-col gap-12 md:gap-16 relative z-20">
+                {steps.map((step, index) => (
+                  <StepItem key={step.title} step={step} index={index} />
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

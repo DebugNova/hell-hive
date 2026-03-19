@@ -7,27 +7,27 @@ import Link from "next/link"
 
 const footerLinks = {
   product: [
-    { label: "Discover Events", href: "#discover" },
-    { label: "Host a Party", href: "#host" },
-    { label: "Pricing", href: "#" },
-    { label: "For Business", href: "#" },
+    { label: "Discover Events", href: "/discover" },
+    { label: "Host a Party", href: "/host-a-party" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "For Business", href: "/for-business" },
   ],
   company: [
-    { label: "About Us", href: "#about" },
-    { label: "Careers", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Press Kit", href: "#" },
+    { label: "About Us", href: "/about" },
+    { label: "Careers", href: "/careers" },
+    { label: "Blog", href: "/blog" },
+    { label: "Press Kit", href: "/press-kit" },
   ],
   resources: [
-    { label: "Help Center", href: "#" },
-    { label: "Host Guide", href: "#" },
-    { label: "Community", href: "#" },
-    { label: "Safety", href: "#" },
+    { label: "Help Center", href: "/help-center" },
+    { label: "Host Guide", href: "/host-guide" },
+    { label: "Community", href: "/community" },
+    { label: "Safety", href: "/safety" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Cookie Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Cookie Policy", href: "/cookies" },
   ],
 }
 

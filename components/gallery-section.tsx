@@ -49,7 +49,7 @@ const galleryImages = [
 
 export function GallerySection() {
   return (
-    <section id="gallery" className="py-24 relative overflow-hidden">
+    <section id="gallery" className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-black pointer-events-none" />
       <FireBackground />
@@ -64,7 +64,7 @@ export function GallerySection() {
           className="text-center mb-16"
         >
           <span className="text-white/50 text-sm font-semibold uppercase tracking-widest">Gallery</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mt-3 mb-6 tracking-tight drop-shadow-md">
             Moments That Matter
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto text-pretty">
@@ -73,7 +73,7 @@ export function GallerySection() {
         </motion.div>
 
         {/* Masonry Gallery Wrapper */}
-        <div className="mt-12 p-6 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
           <div className="columns-1 md:columns-2 lg:columns-3 gap-4 relative z-10 w-full">

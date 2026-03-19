@@ -49,7 +49,7 @@ const itemVariants = {
 
 export function HowItWorks() {
   return (
-    <section id="about" className="py-16 sm:py-24 relative overflow-hidden">
+    <section id="about" className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
       
       {/* Reduced flame intensity for this specific section */}
       <div className="absolute inset-0 opacity-30 pointer-events-none z-0">
@@ -73,14 +73,14 @@ export function HowItWorks() {
           >
             How It Works
           </motion.span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-4">
-            Three Steps to Your <br className="hidden sm:block" />
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 px-4 tracking-tight drop-shadow-md">
+            Three Steps to Your <br className="hidden md:block" />
             <span className="text-[var(--hive-orange)] drop-shadow-[0_0_15px_rgba(255,106,0,0.6)]">Next Adventure</span>
           </h2>
         </motion.div>
 
         {/* Steps Wrapper */}
-        <div className="mt-8 sm:mt-12 p-6 sm:p-8 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
           
           <motion.div 

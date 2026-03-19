@@ -45,11 +45,11 @@ export function EventCard({
       }}
       whileHover={{ y: -8 }}
       className={`group cursor-pointer relative overflow-hidden rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] ${
-        featured ? "md:col-span-2 md:row-span-2" : ""
+        featured ? "md:col-span-2" : ""
       }`}
     >
       {/* Image Container */}
-      <div className={`relative overflow-hidden ${featured ? "h-64 sm:h-80 md:h-full" : "h-48 sm:h-52"}`}>
+      <div className={`relative overflow-hidden w-full ${featured ? "h-40 sm:h-48 md:h-[18rem]" : "h-32 sm:h-40"}`}>
         <Image
           src={image}
           alt={title}
@@ -92,9 +92,9 @@ export function EventCard({
       </div>
 
       {/* Content */}
-      <div className={`relative p-4 sm:p-5 ${featured ? "md:absolute md:bottom-0 md:left-0 md:right-0 md:p-6 lg:p-8" : ""}`}>
-        <h3 className={`font-bold text-white mb-2 sm:mb-3 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.6)] transition-all duration-300 line-clamp-2 ${
-          featured ? "text-xl sm:text-2xl md:text-3xl" : "text-base sm:text-lg"
+      <div className={`relative p-3 sm:p-4 ${featured ? "md:absolute md:bottom-0 md:left-0 md:right-0 md:p-5 lg:p-6" : ""}`}>
+        <h3 className={`font-bold text-white mb-1.5 sm:mb-2 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.6)] transition-all duration-300 line-clamp-2 ${
+          featured ? "text-base sm:text-lg md:text-xl" : "text-sm sm:text-base"
         }`}>
           {title}
         </h3>

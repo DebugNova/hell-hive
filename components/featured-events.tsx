@@ -58,11 +58,11 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
       transition={{ duration: 0.8, delay: index * 0.2 }}
       className="group relative"
     >
-      <div className={`grid md:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
+      <div className={`grid md:grid-cols-2 gap-6 md:gap-8 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
         {/* Image */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className={`relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden ${index % 2 === 1 ? "md:order-2" : ""}`}
+          className={`relative h-[200px] sm:h-[250px] md:h-[320px] rounded-2xl overflow-hidden ${index % 2 === 1 ? "md:order-2" : ""}`}
         >
           <Image
             src={event.image}
@@ -96,13 +96,13 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
         </motion.div>
 
         {/* Content */}
-        <div className={`space-y-6 ${index % 2 === 1 ? "md:order-1" : ""}`}>
+        <div className={`space-y-4 sm:space-y-6 ${index % 2 === 1 ? "md:order-1" : ""}`}>
           <motion.h3
             initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-3xl md:text-4xl font-bold text-white group-hover:drop-shadow-[0_0_10px_rgba(255,106,0,0.6)] transition-all"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white group-hover:drop-shadow-[0_0_10px_rgba(255,106,0,0.6)] transition-all"
           >
             {event.title}
           </motion.h3>
@@ -112,7 +112,7 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-lg text-white/60 leading-relaxed"
+            className="text-base sm:text-lg text-white/60 leading-relaxed"
           >
             {event.description}
           </motion.p>
@@ -122,18 +122,18 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-6 text-white/60"
+            className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base text-white/60"
           >
-            <div className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-white/50" />
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-white/50" />
               <span>{event.date}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-white/50" />
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-white/50" />
               <span>{event.location}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-white/50" />
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white/50" />
               <span>{event.attendees.toLocaleString()} attending</span>
             </div>
           </motion.div>
@@ -161,7 +161,7 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
 
 export function FeaturedEvents() {
   return (
-    <section className="py-24 relative">
+    <section className="py-12 sm:py-16 md:py-20 relative">
       {/* Background accents */}
       <FireBackground />
       
@@ -175,7 +175,7 @@ export function FeaturedEvents() {
           className="text-center mb-20"
         >
           <span className="text-white/50 text-sm font-semibold uppercase tracking-widest">Don't Miss Out</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mt-3 mb-6 tracking-tight drop-shadow-md">
             Featured Experiences
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto text-pretty">
@@ -184,10 +184,10 @@ export function FeaturedEvents() {
         </motion.div>
 
         {/* Featured Events Wrapper */}
-        <div className="mt-12 p-6 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
-          <div className="space-y-24 relative z-10">
+          <div className="space-y-16 md:space-y-24 relative z-10">
             {featuredEvents.map((event, index) => (
               <FeaturedEventCard key={event.title} event={event} index={index} />
             ))}

@@ -37,7 +37,7 @@ const itemVariants = {
 
 export function HostCTA() {
   return (
-    <section id="host" className="py-16 sm:py-24 relative overflow-hidden">
+    <section id="host" className="py-12 sm:py-16 md:py-20 relative overflow-hidden">
       
       {/* Background effects */}
       <div className="absolute inset-0 bg-black pointer-events-none" />
@@ -46,7 +46,7 @@ export function HostCTA() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-[2.5rem] overflow-hidden">
           {/* Glass card */}
-          <div className="bg-[#0a0a0e]/60 backdrop-blur-md border border-white/5 p-6 sm:p-8 md:p-12 lg:p-16 shadow-2xl">
+          <div className="bg-[#0a0a0e]/60 backdrop-blur-md border border-white/5 p-5 sm:p-6 md:p-8 lg:p-10 shadow-2xl rounded-[2rem]">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
             <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
               {/* Content */}
@@ -66,7 +66,7 @@ export function HostCTA() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-md"
                 >
                   Ready to Throw the{" "}
                   <span className="text-[var(--hive-orange)] drop-shadow-[0_0_15px_rgba(255,106,0,0.6)]">Ultimate Party?</span>

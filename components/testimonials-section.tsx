@@ -66,7 +66,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="my-20 relative pt-16 sm:py-24">
+    <section id="testimonials" className="my-10 sm:my-16 relative pt-12 sm:pt-16 md:pt-20">
       {/* Background constraints from old section */}
       <div className="absolute inset-0 bg-black pointer-events-none" />
       <FireBackground />
@@ -83,7 +83,7 @@ export function TestimonialsSection() {
             <span className="inline-block text-white/50 text-xs sm:text-sm font-semibold uppercase tracking-widest py-1 px-4 border border-white/10 bg-white/5 backdrop-blur-md rounded-lg">Testimonials</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tighter">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-md">
             What our users say
           </h2>
           <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto text-pretty mt-2">
@@ -92,7 +92,7 @@ export function TestimonialsSection() {
         </motion.div>
 
         {/* Testimonials Wrapper */}
-        <div className="mt-10 sm:mt-12 w-full mx-auto p-4 sm:p-8 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="mt-6 sm:mt-10 w-full mx-auto p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
           {/* Horizontally shorter highlight to cleanly match the inner aesthetic */}
           <div className="absolute inset-x-[10%] md:inset-x-[20%] lg:inset-x-[25%] top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
           

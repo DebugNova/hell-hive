@@ -81,7 +81,7 @@ export function EventsSection() {
   const [activeCategory, setActiveCategory] = useState("All")
 
   return (
-    <section id="discover" className="py-16 sm:py-24 relative">
+    <section id="discover" className="py-10 sm:py-16 relative">
       
       <FireBackground />
       
@@ -102,7 +102,7 @@ export function EventsSection() {
           >
             Discover
           </motion.span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-md">
             Trending Events
           </h2>
           <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto text-pretty px-4">
@@ -111,7 +111,7 @@ export function EventsSection() {
         </motion.div>
 
         {/* Events Content Wrapper */}
-        <div className="mt-8 sm:mt-12 p-4 sm:p-8 md:p-12 lg:p-16 rounded-[2.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
           <div className="relative z-10 w-full overflow-hidden sm:overflow-visible">

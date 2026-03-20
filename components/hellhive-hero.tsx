@@ -35,8 +35,8 @@ function InteractiveHoneycomb() {
   const HEX_HEIGHT = Math.sqrt(3) * HEX_SIZE
 
   useEffect(() => {
-    // Skip on mobile or low-end devices
-    if (tier === "low" || prefersReduced || isMobileScreen()) return
+    // Skip on low-end devices or if user prefers reduced motion
+    if (tier === "low" || prefersReduced) return
 
     const canvas = canvasRef.current
     if (!canvas) return
@@ -76,6 +76,20 @@ function InteractiveHoneycomb() {
       mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
     window.addEventListener("mousemove", handleMouseMove, { passive: true })
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!canvasRef.current || e.touches.length === 0) return
+      const rect = canvasRef.current.getBoundingClientRect()
+      mouseRef.current = { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top }
+    }
+
+    const handleTouchEnd = () => {
+      mouseRef.current = { x: -1000, y: -1000 }
+    }
+
+    window.addEventListener("touchstart", handleTouchMove, { passive: true })
+    window.addEventListener("touchmove", handleTouchMove, { passive: true })
+    window.addEventListener("touchend", handleTouchEnd, { passive: true })
 
     const drawHexagon = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, glow: number) => {
       ctx.beginPath()
@@ -158,12 +172,15 @@ function InteractiveHoneycomb() {
     return () => {
       window.removeEventListener("resize", resizeCanvas)
       window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("touchstart", handleTouchMove)
+      window.removeEventListener("touchmove", handleTouchMove)
+      window.removeEventListener("touchend", handleTouchEnd)
       if (animationRef.current) cancelAnimationFrame(animationRef.current)
     }
   }, [tier, prefersReduced, HEX_HEIGHT, HEX_WIDTH, HEX_SIZE])
 
-  // Don't render canvas on mobile or low-end
-  if (tier === "low" || prefersReduced || isMobileScreen()) return null
+  // Don't render canvas on low-end
+  if (tier === "low" || prefersReduced) return null
 
   return (
     <canvas

@@ -64,10 +64,10 @@ export function Footer() {
                 />
               </div>
               <button
-                className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-[var(--hive-red)] to-[var(--hive-orange)] shadow-[0_0_15px_rgba(255,42,42,0.4)] text-white font-semibold text-sm rounded-lg hover:opacity-90 transition-all flex items-center gap-2 active:scale-95"
+                className="w-[42px] sm:w-auto h-[42px] sm:h-auto px-0 sm:px-6 flex items-center justify-center bg-gradient-to-r from-[var(--hive-red)] to-[var(--hive-orange)] shadow-[0_0_15px_rgba(255,42,42,0.4)] text-white font-semibold text-sm rounded-lg hover:opacity-90 transition-all shrink-0 active:scale-95"
               >
                 <span className="hidden sm:inline">Subscribe</span>
-                <Send className="h-4 w-4 sm:hidden" />
+                <Send className="h-[18px] w-[18px] sm:h-4 sm:w-4 sm:hidden sm:mr-[-4px]" />
               </button>
             </div>
           </div>
@@ -75,8 +75,8 @@ export function Footer() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 lg:gap-12 mb-10 sm:mb-16">
           {/* Brand */}
-          <div className="col-span-2 sm:col-span-3 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 group mb-4 sm:mb-6">
+          <div className="col-span-2 sm:col-span-3 md:col-span-2 flex flex-col items-center text-center sm:block sm:text-left">
+            <Link href="/" className="flex items-center justify-center sm:justify-start gap-2 group mb-4 sm:mb-6">
               <div className="relative">
                 <Flame className="h-7 w-7 sm:h-8 sm:w-8 text-[var(--hive-orange)]" />
                 <div className="absolute inset-0 blur-lg bg-[var(--hive-orange)]/50 -z-10 animate-pulse" />
@@ -86,12 +86,12 @@ export function Footer() {
                 <span className="text-white">HIVE</span>
               </span>
             </Link>
-            <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-xs">
+            <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 max-w-xs mx-auto sm:mx-0">
               The premium event marketplace for discovering and hosting unforgettable experiences.
             </p>
             
             {/* Social Links — plain links with CSS transitions */}
-            <div className="flex gap-3 sm:gap-4">
+            <div className="flex justify-center sm:justify-start gap-3 sm:gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -106,9 +106,9 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div>
+          <div className="flex flex-col items-center text-center sm:block sm:text-left">
             <h4 className="font-semibold text-white text-sm sm:text-base mb-3 sm:mb-4">Product</h4>
-            <ul className="space-y-2 sm:space-y-3">
+            <ul className="flex flex-col items-center sm:block space-y-2 sm:space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors">
@@ -119,9 +119,9 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center sm:block sm:text-left">
             <h4 className="font-semibold text-white text-sm sm:text-base mb-3 sm:mb-4">Company</h4>
-            <ul className="space-y-2 sm:space-y-3">
+            <ul className="flex flex-col items-center sm:block space-y-2 sm:space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-xs sm:text-sm text-white/60 hover:text-white transition-colors">
@@ -160,7 +160,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-border">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-6 sm:pt-8 border-t border-border mt-2 sm:mt-0">
           <p className="text-xs sm:text-sm text-white/60 text-center sm:text-left">
             © 2026 HellHive. All rights reserved.
           </p>

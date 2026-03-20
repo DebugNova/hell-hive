@@ -43,8 +43,8 @@ export default function Home() {
       <FeaturedEvents />
       <GallerySection />
       <HowItWorks />
-      <TestimonialsSection />
       <HostCTA />
+      <TestimonialsSection />
       <Footer />
     </main>
   )

@@ -4,7 +4,9 @@ import { useParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Flame, MapPin, Info, CheckCircle2, HelpCircle, ShieldAlert, ChevronDown, ChevronUp, ShieldCheck, Lock, Award, Flag } from "lucide-react"
-import { EventTemplate, EventData } from "@/components/event-template"
+import { EventTemplate, EventData, RelatedEvent } from "@/components/event-template"
+import { EventComments } from "@/components/event-comments"
+import { useMemo } from "react"
 
 const expandableSections = [
   {
@@ -115,12 +117,28 @@ export default function EventDetailPage() {
   const params = useParams()
   const [slug, setSlug] = useState<string>("")
   const [openSection, setOpenSection] = useState<number | null>(null)
-  
+
   useEffect(() => {
     if (params?.slug) {
       setSlug(params.slug as string)
     }
   }, [params])
+
+  const relatedEvents: RelatedEvent[] = useMemo(() => {
+    if (!slug) return []
+    return Object.entries(eventDetailsDb)
+      .filter(([key]) => key !== slug)
+      .slice(0, 4)
+      .map(([key, ev]: [string, any]) => ({
+        slug: key,
+        title: ev.title,
+        date: ev.date,
+        price: ev.price,
+        image: ev.image,
+        category: ev.category,
+        location: ev.location,
+      }))
+  }, [slug])
 
   if (!slug) return <div className="min-h-screen bg-black" />
 
@@ -145,9 +163,9 @@ export default function EventDetailPage() {
   }
 
   return (
-    <EventTemplate event={eventData as EventData}>
+    <EventTemplate event={eventData as EventData} relatedEvents={relatedEvents}>
       {/* 1. About Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
@@ -198,7 +216,7 @@ export default function EventDetailPage() {
         <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
           <p className="font-bold text-lg mb-2 text-white">{eventData.location}</p>
           <p className="text-white/60 mb-6">{eventData.fullAddress}</p>
-          
+
           <div className="w-full h-48 bg-[#0a0a0e] rounded-xl border border-white/10 relative overflow-hidden flex items-center justify-center group">
             <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=New+York,NY&zoom=14&size=800x400&maptype=roadmap&style=feature:all|element:labels.text.fill|color:0x8ec3b9&style=feature:all|element:labels.text.stroke|color:0x1a3646&style=feature:all|element:labels.icon|visibility:off&style=feature:administrative.country|element:geometry.stroke|color:0x4b6878&style=feature:administrative.country|element:labels.text.fill|color:0x223541&style=feature:administrative.province|element:geometry.stroke|color:0x4b6878&style=feature:administrative.province|element:labels.text.fill|color:0x223541&style=feature:landscape|element:geometry|color:0x000000&style=feature:poi|element:geometry|color:0x1a3646&style=feature:road|element:geometry|color:0x263c4f&style=feature:road|element:geometry.stroke|color:0x223541&style=feature:transit|element:geometry|color:0x263c4f&style=feature:transit|element:geometry.stroke|color:0x223541&style=feature:water|element:geometry|color:0x0e1626')] bg-cover opacity-50 grayscale contrast-150 group-hover:scale-105 transition-transform duration-700" />
             <div className="relative z-10 w-12 h-12 bg-black/60 backdrop-blur-md rounded-full border border-[var(--hive-orange)] flex items-center justify-center shadow-[0_0_20px_rgba(255,106,0,0.5)]">
@@ -230,9 +248,9 @@ export default function EventDetailPage() {
               <div>
                 <p className="font-bold text-white text-lg leading-tight">Hosted by {eventData.host}</p>
                 <div className="flex items-center gap-2 mt-1.5">
-                   <p className="text-xs font-medium text-white/50">Joined 2024</p>
-                   <span className="w-1 h-1 rounded-full bg-white/20" />
-                   <p className="text-xs font-medium text-white/50">{Math.floor(Math.random() * 40) + 12} Events hosted</p>
+                  <p className="text-xs font-medium text-white/50">Joined 2024</p>
+                  <span className="w-1 h-1 rounded-full bg-white/20" />
+                  <p className="text-xs font-medium text-white/50">{Math.floor(Math.random() * 40) + 12} Events hosted</p>
                 </div>
               </div>
             </div>
@@ -244,30 +262,30 @@ export default function EventDetailPage() {
 
           {/* Safety Features */}
           <div className="flex-1">
-             <h3 className="text-xl font-bold mb-6 text-white/90">Safety & Security</h3>
-             <ul className="space-y-5">
-               <li className="flex items-start gap-4">
-                 <ShieldCheck className="w-5 h-5 text-white/40 shrink-0 mt-0.5" />
-                 <div>
-                   <p className="font-semibold text-white/90 text-sm">Verified Event</p>
-                   <p className="text-xs text-white/50 mt-1 leading-relaxed">Host identity and venue authenticity strongly verified by the Hell Hive security team.</p>
-                 </div>
-               </li>
-               <li className="flex items-start gap-4">
-                 <Lock className="w-5 h-5 text-white/40 shrink-0 mt-0.5" />
-                 <div>
-                   <p className="font-semibold text-white/90 text-sm">Secure Payment</p>
-                   <p className="text-xs text-white/50 mt-1 leading-relaxed">All transactions are heavily encrypted and 100% protected through our platform.</p>
-                 </div>
-               </li>
-               <li className="flex items-start gap-4">
-                 <Award className="w-5 h-5 text-white/40 shrink-0 mt-0.5" />
-                 <div>
-                   <p className="font-semibold text-white/90 text-sm">Trusted Selection</p>
-                   <p className="text-xs text-white/50 mt-1 leading-relaxed">Top-rated organizers with historical verifiable positive attendee feedback.</p>
-                 </div>
-               </li>
-             </ul>
+            <h3 className="text-xl font-bold mb-6 text-white/90">Safety & Security</h3>
+            <ul className="space-y-5">
+              <li className="flex items-start gap-4">
+                <ShieldCheck className="w-5 h-5 text-white/40 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-white/90 text-sm">Verified Event</p>
+                  <p className="text-xs text-white/50 mt-1 leading-relaxed">Host identity and venue authenticity strongly verified by the Hell Hive security team.</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <Lock className="w-5 h-5 text-white/40 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-white/90 text-sm">Secure Payment</p>
+                  <p className="text-xs text-white/50 mt-1 leading-relaxed">All transactions are heavily encrypted and 100% protected through our platform.</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <Award className="w-5 h-5 text-white/40 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-white/90 text-sm">Trusted Selection</p>
+                  <p className="text-xs text-white/50 mt-1 leading-relaxed">Top-rated organizers with historical verifiable positive attendee feedback.</p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </motion.div>
@@ -288,10 +306,10 @@ export default function EventDetailPage() {
         <div className="space-y-4">
           {expandableSections.map((section, idx) => (
             <div key={idx} className="border-b border-white/10 last:border-0 pb-1">
-              <button 
+              <button
                 onClick={() => toggleSection(idx)}
                 className="w-full text-left py-4 flex items-center justify-between focus:outline-none group transition-colors"
-               >
+              >
                 <span className="font-bold text-lg text-white/80 group-hover:text-white transition-colors pr-4">{section.title}</span>
                 {openSection === idx ? (
                   <ChevronUp className="w-5 h-5 text-[var(--hive-orange)] shrink-0 transition-transform duration-300" />
@@ -309,7 +327,7 @@ export default function EventDetailPage() {
                     className="overflow-hidden"
                   >
                     <div className="pb-6 text-white/60 text-sm leading-relaxed whitespace-pre-line text-pretty">
-                       {section.content}
+                      {section.content}
                     </div>
                   </motion.div>
                 )}
@@ -318,6 +336,11 @@ export default function EventDetailPage() {
           ))}
         </div>
       </motion.div>
+
+      <hr className="border-white/10 mt-6 mb-12" />
+
+      {/* 6. Community Comments */}
+      <EventComments />
 
     </EventTemplate>
   )

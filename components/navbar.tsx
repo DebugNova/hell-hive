@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Flame, ArrowRight, Heart, User } from "lucide-react"
 import { GlassButton } from "@/components/ui/glass-button"
+import { HeroAnimatedButton } from "@/components/hellhive-hero"
 import Link from "next/link"
 
 const navLinks = [
@@ -99,13 +100,12 @@ export function Navbar() {
 
               {/* CTA Button */}
               <div className="hidden md:block">
-                <GlassButton
-                  variant="primary"
-                  className="px-6 py-2 text-sm !h-auto hover:scale-105 active:scale-95 transition-transform"
+                <HeroAnimatedButton
+                  className="px-6 py-2 text-sm !h-auto"
                   href="#host"
                 >
                   Host a Party
-                </GlassButton>
+                </HeroAnimatedButton>
               </div>
 
               {/* Mobile Menu Button */}
@@ -187,14 +187,14 @@ export function Navbar() {
                 
                 {/* CTA */}
                 <div className="p-4 border-t border-border/50">
-                  <GlassButton
-                    variant="primary"
+                  <HeroAnimatedButton
                     className="w-full text-base !py-3"
+                    containerClassName="w-full"
                     href="#host"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Host a Party
-                  </GlassButton>
+                  </HeroAnimatedButton>
                 </div>
               </div>
             </motion.div>

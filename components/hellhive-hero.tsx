@@ -343,9 +343,9 @@ function EmberParticles() {
 // ============================================================
 // COMPONENT: HeroAnimatedButton
 // ============================================================
-function HeroAnimatedButton({ href, children }: { href: string; children: React.ReactNode }) {
+export function HeroAnimatedButton({ href, children, className, containerClassName, onClick }: { href: string; children: React.ReactNode; className?: string; containerClassName?: string; onClick?: () => void }) {
   return (
-    <div className="group relative inline-flex w-full sm:w-auto">
+    <div className={`group relative inline-flex w-full sm:w-auto ${containerClassName || ''}`}>
       {/* Diffuse glow on hover */}
       <div className="absolute -inset-1 rounded-full bg-white/20 blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none" />
       
@@ -363,7 +363,8 @@ function HeroAnimatedButton({ href, children }: { href: string; children: React.
         {/* Inner Button Content */}
         <Link
           href={href}
-          className="relative inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-full bg-[#0a0a0e]/95 backdrop-blur-sm text-white font-semibold tracking-wide transition-all duration-500 hover:bg-white/[0.05] hover:scale-[1.02] active:scale-[0.98]"
+          onClick={onClick}
+          className={`relative inline-flex items-center justify-center w-full sm:w-auto rounded-full bg-[#0a0a0e]/95 backdrop-blur-sm text-white font-semibold tracking-wide transition-all duration-500 hover:bg-white/[0.05] hover:scale-[1.02] active:scale-[0.98] ${className || 'px-10 py-4'}`}
         >
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-30 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none" />
           

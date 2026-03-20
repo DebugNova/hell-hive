@@ -201,7 +201,7 @@ function EmberParticles() {
   const prefersReduced = useReducedMotion()
 
   useEffect(() => {
-    if (tier === "low" || prefersReduced) return
+    if (prefersReduced) return
 
     const canvas = canvasRef.current
     if (!canvas) return
@@ -220,29 +220,44 @@ function EmberParticles() {
       speedX: number; speedY: number
       color: string; opacity: number
       life: number; maxLife: number
+      sinOffset: number; sinSpeed: number
     }
 
-    const emberColors = ["#FF6A00", "#FF4500", "#D4A017", "#FF2A2A", "#FFA500"]
+    const emberColors = ["#FF6A00", "#FF4500", "#D4A017", "#FF2A2A", "#FFA500", "#FF8C00"]
     
-    // Reduced particle count based on device tier
-    const particleCount = isMobileScreen() ? 10 : (tier === "high" ? 30 : 15)
+    // Increased particle count for higher density while maintaining performance
+    let particleCount = 100;
+    if (tier === "high") {
+      particleCount = isMobileScreen() ? 60 : 160;
+    } else if (tier === "medium") {
+      particleCount = isMobileScreen() ? 35 : 80;
+    } else { // low tier still gets some fire elements
+      particleCount = isMobileScreen() ? 20 : 35;
+    }
 
-    const createEmber = (): Ember => ({
-      x: Math.random() * canvas.width,
-      y: canvas.height + 20,
-      size: Math.random() * 2 + 0.5,
-      speedX: (Math.random() - 0.5) * 0.6,
-      speedY: -(Math.random() * 1 + 0.3),
-      color: emberColors[Math.floor(Math.random() * emberColors.length)],
-      opacity: Math.random() * 0.5 + 0.2,
-      life: 0,
-      maxLife: Math.random() * 300 + 150,
-    })
+    const createEmber = (): Ember => {
+      // Create a mix of large blurry background embers (30%) and small crisp foreground embers (70%)
+      const isBackground = Math.random() > 0.7;
+      
+      return {
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * 100,
+        size: isBackground ? (Math.random() * 4 + 2) : (Math.random() * 2 + 0.5),
+        speedX: (Math.random() - 0.5) * (isBackground ? 0.5 : 1.2),
+        speedY: -(Math.random() * 2.5 + 0.8),
+        color: emberColors[Math.floor(Math.random() * emberColors.length)],
+        opacity: isBackground ? (Math.random() * 0.25 + 0.1) : (Math.random() * 0.6 + 0.3),
+        life: 0,
+        maxLife: Math.random() * 300 + 150,
+        sinOffset: Math.random() * Math.PI * 2,
+        sinSpeed: Math.random() * 0.03 + 0.01
+      };
+    }
 
     const embers: Ember[] = []
     for (let i = 0; i < particleCount; i++) {
       const ember = createEmber()
-      ember.y = Math.random() * canvas.height
+      ember.y = Math.random() * canvas.height // Distribute initially across screen
       ember.life = Math.random() * ember.maxLife
       embers.push(ember)
     }
@@ -258,7 +273,8 @@ function EmberParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       embers.forEach((ember, index) => {
-        ember.x += ember.speedX + Math.sin(ember.life * 0.02) * 0.2
+        // Add dynamic swaying to movement
+        ember.x += ember.speedX + Math.sin(ember.life * ember.sinSpeed + ember.sinOffset) * 0.4
         ember.y += ember.speedY
         ember.life++
 
@@ -289,7 +305,8 @@ function EmberParticles() {
     }
   }, [tier, prefersReduced])
 
-  if (tier === "low" || prefersReduced) return null
+  // Still return null if user prefers reduced motion
+  if (prefersReduced) return null
 
   return (
     <canvas
@@ -350,7 +367,7 @@ export default function HellHiveHero() {
       {/* LAYER 3: Interactive honeycomb (skipped on mobile/low-end) */}
       <InteractiveHoneycomb />
 
-      {/* LAYER 4: Ember particles (reduced on mobile, skipped on low-end) */}
+      {/* LAYER 4: Ember particles (reduced on mobile/low-end) */}
       <EmberParticles />
 
       {/* LAYER 5: Content */}

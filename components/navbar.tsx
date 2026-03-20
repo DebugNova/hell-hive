@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Flame, ArrowRight, Heart, User } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { GlassButton } from "@/components/ui/glass-button"
 import Link from "next/link"
 
@@ -26,7 +25,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden"
@@ -40,15 +38,13 @@ export function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+      <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
             ? "glass-strong py-3 shadow-lg shadow-background/50" 
             : "py-4 sm:py-5 bg-gradient-to-b from-background/80 to-transparent"
         }`}
+        style={{ willChange: "backdrop-filter" }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -63,19 +59,13 @@ export function Navbar() {
                 }
               }}
             >
-              <motion.div
-                whileHover={{ rotate: 15, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="relative"
-              >
+              <div className="relative">
                 <Flame className="h-7 w-7 sm:h-8 sm:w-8 text-white drop-shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
-                <motion.div 
-                  className="absolute inset-0 blur-[15px] bg-[#8B5CF6]/50 -z-10 rounded-full"
-                  animate={{ opacity: [0.5, 0.8, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                {/* CSS animated glow instead of framer-motion infinite loop */}
+                <div 
+                  className="absolute inset-0 blur-[15px] bg-[#8B5CF6]/50 -z-10 rounded-full animate-pulse"
                 />
-              </motion.div>
+              </div>
               <span className="text-xl sm:text-2xl font-sans font-black tracking-[0.1em] text-white uppercase drop-shadow-[0_0_10px_rgba(139,92,246,0.3)] group-hover:drop-shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all duration-300">
                 HELLHIVE
               </span>
@@ -83,97 +73,53 @@ export function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1 lg:gap-2">
-              {navLinks.map((link, index) => (
-                <motion.div
+              {navLinks.map((link) => (
+                <Link
                   key={link.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.1 }}
+                  href={link.href}
+                  className="px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors relative group rounded-lg hover:bg-secondary/50"
                 >
-                  <Link
-                    href={link.href}
-                    className="px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors relative group rounded-lg hover:bg-secondary/50"
-                  >
-                    {link.label}
-                    <motion.span 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary rounded-full group-hover:w-3/4 transition-all duration-300"
-                    />
-                  </Link>
-                </motion.div>
+                  {link.label}
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary rounded-full group-hover:w-3/4 transition-all duration-300" />
+                </Link>
               ))}
             </div>
 
             {/* Right Side Actions */}
             <div className="flex items-center justify-end gap-1 sm:gap-4">
               {/* Action Icons */}
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex items-center gap-1"
-              >
+              <div className="flex items-center gap-1">
                 <Link href="/favorites" className="p-2 text-white/70 hover:text-[var(--hive-orange)] hover:bg-white/10 rounded-full transition-all duration-300">
                   <Heart className="h-5 w-5" />
                 </Link>
                 <Link href="/profile" className="p-2 text-white/70 hover:text-[var(--hive-orange)] hover:bg-white/10 rounded-full transition-all duration-300">
                   <User className="h-5 w-5" />
                 </Link>
-              </motion.div>
+              </div>
 
               {/* CTA Button */}
               <div className="hidden md:block">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <GlassButton
+                  variant="primary"
+                  className="px-6 py-2 text-sm !h-auto hover:scale-105 active:scale-95 transition-transform"
+                  href="#host"
                 >
-                  <GlassButton
-                    variant="primary"
-                    className="px-6 py-2 text-sm !h-auto"
-                    href="#host"
-                  >
-                    Host a Party
-                  </GlassButton>
-                </motion.div>
+                  Host a Party
+                </GlassButton>
               </div>
 
               {/* Mobile Menu Button */}
-              <motion.button
-                whileTap={{ scale: 0.9 }}
+              <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 text-foreground rounded-lg hover:bg-secondary/50 transition-colors"
+                className="md:hidden p-2 text-foreground rounded-lg hover:bg-secondary/50 transition-colors active:scale-90"
                 aria-label="Toggle menu"
               >
-                <AnimatePresence mode="wait">
-                  {isMobileMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="h-6 w-6" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="h-6 w-6" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             </div>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
@@ -184,7 +130,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsMobileMenuOpen(false)}
               className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden"
             />
@@ -216,52 +162,39 @@ export function Navbar() {
                       HELLHIVE
                     </span>
                   </Link>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
+                  <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-foreground rounded-lg hover:bg-secondary/50"
+                    className="p-2 text-foreground rounded-lg hover:bg-secondary/50 active:scale-90"
                   >
                     <X className="h-6 w-6" />
-                  </motion.button>
+                  </button>
                 </div>
                 
                 {/* Nav Links */}
                 <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-                  {navLinks.map((link, index) => (
-                    <motion.div
+                  {navLinks.map((link) => (
+                    <Link
                       key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + index * 0.1 }}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center justify-between text-lg text-foreground/80 hover:text-foreground transition-colors py-4 px-4 rounded-xl hover:bg-secondary/50 group"
                     >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center justify-between text-lg text-foreground/80 hover:text-foreground transition-colors py-4 px-4 rounded-xl hover:bg-secondary/50 group"
-                      >
-                        {link.label}
-                        <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                      </Link>
-                    </motion.div>
+                      {link.label}
+                      <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    </Link>
                   ))}
                 </div>
                 
                 {/* CTA */}
                 <div className="p-4 border-t border-border/50">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
+                  <GlassButton
+                    variant="primary"
+                    className="w-full text-base !py-3"
+                    href="#host"
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <GlassButton
-                      variant="primary"
-                      className="w-full text-base !py-3"
-                      href="#host"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Host a Party
-                    </GlassButton>
-                  </motion.div>
+                    Host a Party
+                  </GlassButton>
                 </div>
               </div>
             </motion.div>

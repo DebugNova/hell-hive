@@ -7,49 +7,49 @@ import Image from "next/image"
 
 const galleryImages = [
   {
-    src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=75",
     alt: "Concert crowd",
     label: "Concert Vibes",
     size: "large",
   },
   {
-    src: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=75",
     alt: "DJ performance",
     label: "DJ Nights",
     size: "small",
   },
   {
-    src: "https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=800&q=75",
     alt: "Party lights",
     label: "Neon Glow",
     size: "small",
   },
   {
-    src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=75",
     alt: "Festival crowd",
     label: "Festival Energy",
     size: "medium",
   },
   {
-    src: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=75",
     alt: "Night event",
     label: "Night Out",
     size: "small",
   },
   {
-    src: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&q=75",
     alt: "Party celebration",
     label: "Celebrations",
     size: "medium",
   },
   {
-    src: "https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=800&q=75",
     alt: "Club scene",
     label: "Club Scene",
     size: "small",
   },
   {
-    src: "https://images.unsplash.com/photo-1545128485-c400e7702796?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1545128485-c400e7702796?w=800&q=75",
     alt: "Live music",
     label: "Live Music",
     size: "large",
@@ -71,7 +71,7 @@ export function GallerySection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-10 md:mb-16"
         >
           <span className="text-white/50 text-sm font-semibold uppercase tracking-widest">Gallery</span>
@@ -83,9 +83,9 @@ export function GallerySection() {
           </p>
         </motion.div>
 
-        {/* ===== MOBILE: Horizontal Scroll Carousel (visible below md) ===== */}
+        {/* ===== MOBILE: Horizontal Scroll Carousel ===== */}
         <div className="block md:hidden">
-          <div className="mt-4 p-3 rounded-[1.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+          <div className="mt-4 p-3 rounded-[1.5rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-sm">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             
             <div
@@ -97,13 +97,9 @@ export function GallerySection() {
                 msOverflowStyle: "none",
               }}
             >
-              {galleryImages.map((image, index) => (
-                <motion.div
+              {galleryImages.map((image) => (
+                <div
                   key={image.src}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="relative flex-shrink-0 w-[70vw] max-w-[280px] aspect-[3/4] overflow-hidden rounded-2xl group cursor-pointer snap-start"
                 >
                   <Image
@@ -112,50 +108,36 @@ export function GallerySection() {
                     fill
                     className="object-cover"
                     sizes="70vw"
+                    loading="lazy"
                   />
-                  {/* Bottom gradient overlay for label */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
                   
-                  {/* Label at the bottom */}
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <span className="text-base font-bold text-white drop-shadow-lg">
                       {image.label}
                     </span>
                   </div>
 
-                  {/* Glow border */}
                   <div className="absolute inset-0 ring-1 ring-white/10 rounded-2xl pointer-events-none" />
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Scroll hint text */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="text-center text-white/30 text-xs mt-4 italic"
-          >
+          <p className="text-center text-white/30 text-xs mt-4 italic">
             Swipe to explore →
-          </motion.p>
+          </p>
         </div>
 
-        {/* ===== DESKTOP: Masonry Gallery (visible at md and above) ===== */}
-        <div className="hidden md:block mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        {/* ===== DESKTOP: Masonry Gallery ===== */}
+        <div className="hidden md:block mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-sm">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
           <div className="md:columns-2 lg:columns-3 gap-4 relative z-10 w-full">
-            {galleryImages.map((image, index) => (
-              <motion.div
+            {galleryImages.map((image) => (
+              <div
                 key={image.src}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className={`relative mb-4 overflow-hidden rounded-xl group cursor-pointer break-inside-avoid ${
+                className={`relative mb-4 overflow-hidden rounded-xl group cursor-pointer break-inside-avoid transition-transform duration-300 hover:scale-[1.02] ${
                   image.size === "large" ? "aspect-[4/5]" : image.size === "medium" ? "aspect-[4/3]" : "aspect-square"
                 }`}
               >
@@ -163,23 +145,21 @@ export function GallerySection() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 {/* Hover content */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-all duration-500"
-                >
+                <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                   <span className="text-sm text-white font-medium">{image.alt}</span>
-                </motion.div>
+                </div>
   
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 ring-2 ring-transparent group-hover:ring-[var(--hive-red)]/40 group-hover:shadow-[0_0_20px_rgba(255,42,42,0.3)] transition-all duration-500 rounded-xl pointer-events-none" />
-              </motion.div>
+                <div className="absolute inset-0 ring-2 ring-transparent group-hover:ring-[var(--hive-red)]/40 transition-all duration-300 rounded-xl pointer-events-none" />
+              </div>
             ))}
           </div>
         </div>

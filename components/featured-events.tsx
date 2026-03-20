@@ -1,7 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion"
 import { ArrowRight, Sparkles, Calendar, MapPin, Users } from "lucide-react"
 import { GlassButton } from "@/components/ui/glass-button"
 import { FireBackground } from "@/components/ui/fire-background"
@@ -14,7 +13,7 @@ const featuredEvents = [
     date: "April 15-17, 2026",
     location: "Las Vegas, NV",
     attendees: 5000,
-    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&q=75",
     description: "Three days of non-stop electronic music featuring world-renowned DJs and immersive art installations.",
     tags: ["Festival", "EDM", "Multi-day"],
   },
@@ -23,7 +22,7 @@ const featuredEvents = [
     date: "March 31, 2026",
     location: "The Grand Ballroom, NYC",
     attendees: 800,
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&q=75",
     description: "An exclusive masquerade ball with live orchestral performances and premium cocktails.",
     tags: ["Exclusive", "Black Tie", "Live Music"],
   },
@@ -32,49 +31,37 @@ const featuredEvents = [
     date: "April 8, 2026",
     location: "Miami Harbor",
     attendees: 200,
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&q=75",
     description: "Sail into the sunset with Miami's best DJs, open bar, and unforgettable ocean views.",
     tags: ["VIP", "Yacht", "Sunset"],
   },
 ]
 
 function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"]
-  })
-  
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95])
-
   return (
     <motion.div
-      ref={cardRef}
-      style={{ y, scale }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
       className="group relative"
     >
       <div className={`grid md:grid-cols-2 gap-6 md:gap-8 items-center ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
         {/* Image */}
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className={`relative h-[200px] sm:h-[250px] md:h-[320px] rounded-2xl overflow-hidden ${index % 2 === 1 ? "md:order-2" : ""}`}
-        >
+        <div className={`relative h-[200px] sm:h-[250px] md:h-[320px] rounded-2xl overflow-hidden ${index % 2 === 1 ? "md:order-2" : ""}`}>
           <Image
             src={event.image}
             alt={event.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="lazy"
           />
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
           
           {/* Featured badge */}
-          <div className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-[var(--hive-gold)]/30 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+          <div className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-sm border border-[var(--hive-gold)]/30 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
             <Sparkles className="h-4 w-4 text-[var(--hive-gold)]" />
             <span className="text-sm font-medium text-white">Featured</span>
           </div>
@@ -84,7 +71,7 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
             {event.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 rounded-full bg-[var(--hive-orange)]/10 border border-[var(--hive-orange)]/20 shadow-[0_0_10px_rgba(255,106,0,0.1)] backdrop-blur-md text-xs font-medium text-white group-hover:border-[var(--hive-orange)]/40 transition-colors"
+                className="px-3 py-1 rounded-full bg-[var(--hive-orange)]/10 border border-[var(--hive-orange)]/20 text-xs font-medium text-white group-hover:border-[var(--hive-orange)]/40 transition-colors"
               >
                 {tag}
               </span>
@@ -92,38 +79,20 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
           </div>
           
           {/* Hover glow */}
-          <div className="absolute inset-0 ring-2 ring-transparent group-hover:ring-[var(--hive-orange)]/30 group-hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] transition-all duration-500 rounded-3xl pointer-events-none" />
-        </motion.div>
+          <div className="absolute inset-0 ring-2 ring-transparent group-hover:ring-[var(--hive-orange)]/30 transition-all duration-500 rounded-2xl pointer-events-none" />
+        </div>
 
         {/* Content */}
         <div className={`space-y-4 sm:space-y-6 ${index % 2 === 1 ? "md:order-1" : ""}`}>
-          <motion.h3
-            initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white group-hover:drop-shadow-[0_0_10px_rgba(255,106,0,0.6)] transition-all"
-          >
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white group-hover:drop-shadow-[0_0_10px_rgba(255,106,0,0.6)] transition-all">
             {event.title}
-          </motion.h3>
+          </h3>
 
-          <motion.p
-            initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="text-base sm:text-lg text-white/60 leading-relaxed"
-          >
+          <p className="text-base sm:text-lg text-white/60 leading-relaxed">
             {event.description}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base text-white/60"
-          >
+          <div className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base text-white/60">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-white/50" />
               <span>{event.date}</span>
@@ -136,14 +105,9 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
               <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white/50" />
               <span>{event.attendees.toLocaleString()} attending</span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
+          <div>
             <GlassButton
               variant="primary"
               className="group/btn pt-3 pb-3 px-8"
@@ -152,7 +116,7 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
               Get Tickets
               <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
             </GlassButton>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -162,7 +126,6 @@ function FeaturedEventCard({ event, index }: { event: typeof featuredEvents[0], 
 export function FeaturedEvents() {
   return (
     <section className="py-12 sm:py-16 md:py-20 relative">
-      {/* Background accents */}
       <FireBackground />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -171,7 +134,7 @@ export function FeaturedEvents() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-20"
         >
           <span className="text-white/50 text-sm font-semibold uppercase tracking-widest">Don't Miss Out</span>
@@ -184,7 +147,7 @@ export function FeaturedEvents() {
         </motion.div>
 
         {/* Featured Events Wrapper */}
-        <div className="mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="mt-6 sm:mt-10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-[2rem] bg-[#0a0a0e]/60 border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-sm">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
           <div className="space-y-16 md:space-y-24 relative z-10">

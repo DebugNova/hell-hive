@@ -34,7 +34,6 @@ export function HowItWorks() {
     offset: ["start center", "end center"],
   })
 
-  // The glowing line grows as we scroll down
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
@@ -47,21 +46,21 @@ export function HowItWorks() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={containerRef}>
         <div className="flex flex-col lg:flex-row lg:items-center gap-12 xl:gap-20">
           
-          {/* Left Side: Pictures Stack (Only visible on PC view, hidden on mobile) */}
+          {/* Left Side: Pictures Stack */}
           <div className="hidden lg:block relative w-full lg:w-1/2 h-[500px] xl:h-[600px] shrink-0">
             {/* Picture 1 */}
             <motion.div 
               initial={{ opacity: 0, x: -40, y: -20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="absolute top-0 left-0 w-[65%] h-[70%] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(212,160,23,0.15)] z-20 group"
             >
               <img 
-                src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=1000&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=75&w=800&auto=format&fit=crop" 
                 alt="Crowd at a nightlife event"
                 loading="lazy"
-                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-1000 ease-in-out"
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
             </motion.div>
@@ -71,14 +70,14 @@ export function HowItWorks() {
               initial={{ opacity: 0, x: 40, y: 20 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="absolute bottom-6 right-6 w-[60%] h-[65%] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(255,106,0,0.15)] z-10 group"
             >
               <img 
-                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=75&w=800&auto=format&fit=crop" 
                 alt="DJ hands in the air"
                 loading="lazy"
-                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-1000 ease-in-out"
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
             </motion.div>
@@ -91,19 +90,13 @@ export function HowItWorks() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className="text-left mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4"
             >
               <div>
-                <motion.span 
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="inline-block text-[var(--hive-gold)] text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 drop-shadow-[0_0_8px_rgba(212,160,23,0.8)]"
-                >
+                <span className="inline-block text-[var(--hive-gold)] text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 drop-shadow-[0_0_8px_rgba(212,160,23,0.8)]">
                   The Journey
-                </motion.span>
+                </span>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-[0.9]">
                   How It <br className="hidden sm:block md:hidden" />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--hive-orange)] to-[var(--hive-gold)] drop-shadow-[0_0_15px_rgba(255,106,0,0.4)] ml-2 md:ml-0">
@@ -147,38 +140,34 @@ function StepItem({ step, index }: { step: typeof steps[0], index: number }) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="relative flex items-start gap-6 md:gap-10 group"
     >
-      {/* Number Silhouette Background (Awwwards style) */}
+      {/* Number Silhouette Background */}
       <div 
-        className="absolute -top-6 -right-2 md:-top-10 md:-right-6 text-[6rem] md:text-[10rem] font-black text-transparent select-none z-0 tracking-tighter transition-all duration-700 opacity-20 group-hover:opacity-40 group-hover:scale-105 pointer-events-none"
+        className="absolute -top-6 -right-2 md:-top-10 md:-right-6 text-[6rem] md:text-[10rem] font-black text-transparent select-none z-0 tracking-tighter transition-all duration-500 opacity-20 group-hover:opacity-40 pointer-events-none"
         style={{ WebkitTextStroke: "1px rgba(255,255,255,0.2)" }}
       >
         {numberText}
       </div>
 
-      {/* Floating Dot/Icon on the timeline */}
+      {/* Timeline dot/icon */}
       <div className="relative z-20 flex flex-col items-center shrink-0 mt-1 md:mt-2">
-        <motion.div 
-          whileHover={{ scale: 1.1, rotate: 10 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          className={`w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border border-white/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.4)] group-hover:border-transparent group-hover:bg-gradient-to-br ${step.color} transition-all duration-500 z-10 backdrop-blur-md`}
+        <div 
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border border-white/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.4)] group-hover:border-transparent group-hover:bg-gradient-to-br ${step.color} transition-all duration-500 z-10`}
         >
-          <step.icon className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all" />
-        </motion.div>
+          <step.icon className="w-4 h-4 md:w-5 md:h-5 text-white transition-all" />
+        </div>
         
         {/* Ambient Glow behind the icon */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${step.color} blur-xl rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none`} />
+        <div className={`absolute inset-0 bg-gradient-to-br ${step.color} blur-xl rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none`} />
       </div>
 
       {/* Content */}
       <div className="relative z-10 pt-1 md:pt-2 max-w-lg">
-        <motion.h3 
-          className="text-2xl md:text-3xl font-extrabold text-white mb-2 md:mb-3 tracking-tight drop-shadow-md group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all duration-300"
-        >
+        <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-2 md:mb-3 tracking-tight drop-shadow-md group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all duration-300">
           {step.title}
-        </motion.h3>
+        </h3>
         <p className="text-base md:text-lg text-white/50 font-medium leading-relaxed group-hover:text-white/80 transition-colors duration-500">
           {step.description}
         </p>

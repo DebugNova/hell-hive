@@ -1,11 +1,10 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Calendar, MapPin, Users, ArrowRight, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 interface EventCardProps {
   title: string
@@ -29,24 +28,17 @@ export function EventCard({
   index
 }: EventCardProps) {
   const [isLiked, setIsLiked] = useState(false)
-  const router = useRouter()
   const eventSlug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
   return (
-    <motion.div
-      onClick={() => router.push(`/events/${eventSlug}`)}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        duration: 0.5, 
-        delay: index * 0.1,
-        ease: [0.25, 0.4, 0.25, 1]
-      }}
-      whileHover={{ y: -8 }}
-      className={`group cursor-pointer relative overflow-hidden rounded-2xl bg-white/[0.02] backdrop-blur-xl border border-white/10 transition-all duration-500 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] ${
+    <Link
+      href={`/events/${eventSlug}`}
+      className={`group cursor-pointer relative overflow-hidden rounded-2xl bg-white/[0.02] border border-white/10 transition-all duration-300 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_30px_rgba(255,106,0,0.2)] hover:-translate-y-2 ${
         featured ? "md:col-span-2" : ""
       }`}
+      style={{
+        animationDelay: `${index * 100}ms`,
+      }}
     >
       {/* Image Container */}
       <div className={`relative overflow-hidden w-full ${featured ? "h-40 sm:h-48 md:h-[18rem]" : "h-32 sm:h-40"}`}>
@@ -54,38 +46,33 @@ export function EventCard({
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes={featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
+          loading="lazy"
         />
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         
         {/* Category badge */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 + index * 0.1 }}
-          className="absolute top-3 sm:top-4 left-3 sm:left-4 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-xs font-medium text-white shadow-[0_0_10px_rgba(0,0,0,0.5)]"
-        >
+        <div className="absolute top-3 sm:top-4 left-3 sm:left-4 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 text-xs font-medium text-white shadow-[0_0_10px_rgba(0,0,0,0.5)]">
           {category}
-        </motion.div>
+        </div>
 
         {/* Like button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+        <button
           onClick={(e) => {
+            e.preventDefault()
             e.stopPropagation()
             setIsLiked(!isLiked)
           }}
-          className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 hover:bg-white/20 transition-colors"
+          className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 hover:bg-white/20 transition-colors active:scale-90"
         >
           <Heart 
             className={`h-4 w-4 transition-colors ${
-              isLiked ? "fill-[var(--hive-red)] text-[var(--hive-red)] drop-shadow-[0_0_8px_rgba(255,42,42,0.6)]" : "text-white/70"
+              isLiked ? "fill-[var(--hive-red)] text-[var(--hive-red)]" : "text-white/70"
             }`} 
           />
-        </motion.button>
+        </button>
         
         {/* Hover glow effect */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-[var(--hive-orange)]/20 via-transparent to-transparent pointer-events-none" />
@@ -93,7 +80,7 @@ export function EventCard({
 
       {/* Content */}
       <div className={`relative p-3 sm:p-4 ${featured ? "md:absolute md:bottom-0 md:left-0 md:right-0 md:p-5 lg:p-6" : ""}`}>
-        <h3 className={`font-bold text-white mb-1.5 sm:mb-2 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.6)] transition-all duration-300 line-clamp-2 ${
+        <h3 className={`font-bold text-white mb-1.5 sm:mb-2 group-hover:text-white transition-all duration-300 line-clamp-2 ${
           featured ? "text-base sm:text-lg md:text-xl" : "text-sm sm:text-base"
         }`}>
           {title}
@@ -114,14 +101,11 @@ export function EventCard({
           </div>
         </div>
 
-        <Button
-          variant="ghost"
-          className="p-0 h-auto text-white/70 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,106,0,0.8)] hover:bg-transparent group/btn text-sm transition-all duration-300"
-        >
+        <span className="inline-flex items-center text-sm text-white/70 group-hover:text-white transition-all duration-300">
           View Event
-          <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-        </Button>
+          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+        </span>
       </div>
-    </motion.div>
+    </Link>
   )
 }

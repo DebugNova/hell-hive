@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion"
 import { GlassButton } from "@/components/ui/glass-button"
-import { ArrowRight, Sparkles, Users, DollarSign, Calendar, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Sparkles, Users, DollarSign, Calendar } from "lucide-react"
 import { FireBackground } from "@/components/ui/fire-background"
-import Link from "next/link"
 
 const benefits = [
   { icon: Users, text: "Reach thousands of party-goers" },
@@ -12,28 +11,6 @@ const benefits = [
   { icon: Calendar, text: "Powerful event management" },
   { icon: Sparkles, text: "Premium host tools & analytics" },
 ]
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, x: 30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as any,
-    },
-  },
-}
 
 export function HostCTA() {
   return (
@@ -46,50 +23,37 @@ export function HostCTA() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-[2.5rem] overflow-hidden">
           {/* Glass card */}
-          <div className="bg-[#0a0a0e]/60 backdrop-blur-md border border-white/5 p-5 sm:p-6 md:p-8 lg:p-10 shadow-2xl rounded-[2rem]">
+          <div className="bg-[#0a0a0e]/60 backdrop-blur-sm border border-white/5 p-5 sm:p-6 md:p-8 lg:p-10 shadow-2xl rounded-[2rem]">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
-            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10">
+            
+            {/* Single whileInView for entire container */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center relative z-10"
+            >
               {/* Content */}
               <div>
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/40 backdrop-blur-md border border-[var(--hive-orange)]/30 text-[var(--hive-orange)] shadow-[0_0_10px_rgba(255,106,0,0.2)] text-xs sm:text-sm font-medium mb-4 sm:mb-6"
+                <span
+                  className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/40 border border-[var(--hive-orange)]/30 text-[var(--hive-orange)] shadow-[0_0_10px_rgba(255,106,0,0.2)] text-xs sm:text-sm font-medium mb-4 sm:mb-6"
                 >
                   <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[var(--hive-gold)]" />
                   Become a Host
-                </motion.span>
+                </span>
 
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-md"
-                >
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-md">
                   Ready to Throw the{" "}
                   <span className="text-[var(--hive-orange)] drop-shadow-[0_0_15px_rgba(255,106,0,0.6)]">Ultimate Party?</span>
-                </motion.h2>
+                </h2>
 
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="text-sm sm:text-base md:text-lg text-white/60 mb-6 sm:mb-8 text-pretty"
-                >
+                <p className="text-sm sm:text-base md:text-lg text-white/60 mb-6 sm:mb-8 text-pretty">
                   Join thousands of hosts who are creating unforgettable experiences. 
                   Get the tools, exposure, and support you need to host legendary events.
-                </motion.p>
+                </p>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="flex flex-col sm:flex-row gap-3 sm:gap-4"
-                >
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <GlassButton
                     variant="primary"
                     className="text-sm sm:text-base md:text-lg !px-8 !py-4 group"
@@ -105,37 +69,25 @@ export function HostCTA() {
                   >
                     Learn More
                   </GlassButton>
-                </motion.div>
+                </div>
               </div>
 
-              {/* Benefits */}
-              <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
-              >
-                {benefits.map((benefit, index) => (
-                  <motion.div
+              {/* Benefits — CSS transitions instead of framer-motion */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {benefits.map((benefit) => (
+                  <div
                     key={benefit.text}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-4 sm:p-5 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/10 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] transition-all"
+                    className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] hover:-translate-y-1 hover:scale-[1.03] transition-all duration-300"
                   >
                     <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-black border border-[var(--hive-orange)]/30 flex items-center justify-center mb-2 sm:mb-3 shadow-[0_0_15px_rgba(255,106,0,0.2)]">
                       <benefit.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                     </div>
                     <span className="text-sm sm:text-base text-white font-medium">{benefit.text}</span>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
-
-          {/* Border glow / no extra ring to match other cards */}
-          <div className="absolute inset-0 rounded-[2.5rem] pointer-events-none" />
         </div>
       </div>
     </section>

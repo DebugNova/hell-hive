@@ -1,7 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
-
 interface FlameEffectProps {
   className?: string
   size?: "sm" | "md" | "lg"
@@ -23,18 +21,10 @@ export function FlameEffect({ className = "", size = "md", intensity = "medium" 
 
   return (
     <div className={`relative ${sizeClasses[size]} ${className}`}>
-      {/* Core flame */}
-      <motion.div
-        animate={{
-          scaleY: [1, 1.1, 0.9, 1.05, 1],
-          scaleX: [1, 0.95, 1.05, 0.98, 1],
-        }}
-        transition={{
-          duration: 0.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      {/* Core flame — CSS animation instead of framer-motion */}
+      <div
         className="absolute inset-0 origin-bottom"
+        style={{ animation: "flame-flicker 0.8s ease-in-out infinite" }}
       >
         <svg viewBox="0 0 50 80" className="w-full h-full">
           <defs>
@@ -54,22 +44,12 @@ export function FlameEffect({ className = "", size = "md", intensity = "medium" 
             filter="url(#flameBlur)"
           />
         </svg>
-      </motion.div>
+      </div>
       
-      {/* Inner flame glow */}
-      <motion.div
-        animate={{
-          scaleY: [0.8, 0.95, 0.75, 0.9, 0.8],
-          scaleX: [0.9, 0.8, 0.95, 0.85, 0.9],
-          opacity: [0.6, 0.8, 0.5, 0.7, 0.6],
-        }}
-        transition={{
-          duration: 0.4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.1,
-        }}
+      {/* Inner flame glow — CSS animation */}
+      <div
         className="absolute inset-[20%] origin-bottom"
+        style={{ animation: "flame-flicker 0.6s ease-in-out 0.1s infinite reverse" }}
       >
         <svg viewBox="0 0 50 80" className="w-full h-full">
           <path
@@ -78,12 +58,12 @@ export function FlameEffect({ className = "", size = "md", intensity = "medium" 
             opacity="0.4"
           />
         </svg>
-      </motion.div>
+      </div>
     </div>
   )
 }
 
-// Floating embers that rise from flames
+// Floating embers — CSS animation instead of framer-motion
 export function Embers({ count = 5, className = "" }: { count?: number; className?: string }) {
   const embers = Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -95,23 +75,14 @@ export function Embers({ count = 5, className = "" }: { count?: number; classNam
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
       {embers.map((ember) => (
-        <motion.div
+        <div
           key={ember.id}
-          initial={{ y: 0, x: 0, opacity: 0, scale: 1 }}
-          animate={{
-            y: [-20, -120],
-            x: [0, (ember.id % 2 === 0 ? 1 : -1) * 30],
-            opacity: [0, 1, 0],
-            scale: [1, 0.5],
-          }}
-          transition={{
-            duration: ember.duration,
-            repeat: Infinity,
-            delay: ember.delay,
-            ease: "easeOut",
-          }}
           className="absolute bottom-0 w-1.5 h-1.5 rounded-full bg-gradient-to-t from-primary to-orange-400"
-          style={{ left: `${ember.left}%` }}
+          style={{ 
+            left: `${ember.left}%`,
+            animation: `ember-float ${ember.duration}s ease-out ${ember.delay}s infinite`,
+            willChange: "transform, opacity",
+          }}
         />
       ))}
     </div>

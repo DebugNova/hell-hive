@@ -53,18 +53,18 @@ export function HostCTA() {
                   Get the tools, exposure, and support you need to host legendary events.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
                   <GlassButton
-                    variant="primary"
-                    className="text-sm sm:text-base md:text-lg !px-8 !py-4 group"
+                    variant="orange"
+                    className="text-sm sm:text-base md:text-lg !px-8 !py-4 group w-full sm:w-auto"
                     href="/start-hosting"
                   >
                     Start Hosting
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                   </GlassButton>
                   <GlassButton
-                    variant="secondary"
-                    className="text-sm sm:text-base !px-8 !py-4"
+                    variant="primary"
+                    className="text-sm sm:text-base !px-8 !py-4 w-full sm:w-auto"
                     href="/learn-more"
                   >
                     Learn More
@@ -73,16 +73,16 @@ export function HostCTA() {
               </div>
 
               {/* Benefits — CSS transitions instead of framer-motion */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
                 {benefits.map((benefit) => (
                   <div
                     key={benefit.text}
-                    className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] hover:-translate-y-1 hover:scale-[1.03] transition-all duration-300"
+                    className="flex items-center sm:block p-3 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[var(--hive-orange)]/40 hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] sm:hover:-translate-y-1 sm:hover:scale-[1.03] transition-all duration-300 gap-3.5 sm:gap-0"
                   >
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-black border border-[var(--hive-orange)]/30 flex items-center justify-center mb-2 sm:mb-3 shadow-[0_0_15px_rgba(255,106,0,0.2)]">
+                    <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-black border border-[var(--hive-orange)]/30 flex items-center justify-center mb-0 sm:mb-3 shadow-[0_0_15px_rgba(255,106,0,0.2)]">
                       <benefit.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                     </div>
-                    <span className="text-sm sm:text-base text-white font-medium">{benefit.text}</span>
+                    <span className="text-[15px] sm:text-base text-white/90 sm:text-white font-medium">{benefit.text}</span>
                   </div>
                 ))}
               </div>

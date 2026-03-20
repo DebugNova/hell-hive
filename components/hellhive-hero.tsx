@@ -131,16 +131,40 @@ function InteractiveHoneycomb() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       const { x: mouseX, y: mouseY } = mouseRef.current
+      const isMobile = canvas.width < 768
+      const centerX = canvas.width / 2
+      const centerY = canvas.height / 2
+      const isInteracting = mouseX !== -1000
 
       hexCellsRef.current.forEach((cell) => {
-        const dx = cell.centerX - mouseX
-        const dy = cell.centerY - mouseY
-        const distance = Math.sqrt(dx * dx + dy * dy)
+        let target = 0
 
-        if (distance < GLOW_RADIUS) {
-          cell.targetGlow = Math.max(cell.targetGlow, 1 - distance / GLOW_RADIUS)
+        // 1. Interactive Touch/Mouse Glow
+        if (isInteracting) {
+          const dx = cell.centerX - mouseX
+          const dy = cell.centerY - mouseY
+          const distance = Math.sqrt(dx * dx + dy * dy)
+          if (distance < GLOW_RADIUS) {
+            target = 1 - distance / GLOW_RADIUS
+          }
+        }
+
+        // 2. Default Ambient Glow (Mobile Only)
+        if (isMobile && !isInteracting) {
+          const dcx = cell.centerX - centerX
+          const dcy = cell.centerY - centerY
+          const distCenter = Math.sqrt(dcx * dcx + dcy * dcy)
+          const defaultRadius = 250 // Soft highlight radius
+          if (distCenter < defaultRadius) {
+            target = Math.max(target, (1 - distCenter / defaultRadius) * 0.4)
+          }
+        }
+
+        // 3. Apply Target or Decay
+        if (target > 0) {
+          cell.targetGlow = Math.max(cell.targetGlow, target)
         } else {
-          cell.targetGlow = Math.max(0, cell.targetGlow - 0.03)
+          cell.targetGlow = Math.max(0, cell.targetGlow - 0.03) // Decay
         }
 
         cell.glow += (cell.targetGlow - cell.glow) * 0.1
